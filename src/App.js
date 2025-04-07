@@ -1,25 +1,97 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import NotFound from "./components/PageNotFound";
+import Dashboard from "./components/admin/Dashboard";
+import Users from "./components/admin/Users";
 
-function App() {
+import Login from "./components/Auth/Login";
+import Register from "./components/Auth/Register";
+import ForgotPassword from "./components/Auth/ForgotPassword";
+import ResetPassword from "./components/Auth/ResetPassword";
+import OTPVerification from "./components/Auth/OTPVerification";
+
+import Navbar from "./reuseable/Header";
+import Footer from "./reuseable/Footer";
+
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Services from "./pages/Services";
+
+import ManageBlogCategories from "./components/admin/manage-blogs/ManageBlogCategories";
+import AddEditBlogCategory from "./components/admin/manage-blogs/AddEditBlogCategory";
+
+import { BlogList, BlogDetails } from "./components/blogs";
+import ManageBlogs from "./components/admin/manage-blogs/ManageBlogs";
+import AddBlog from "./components/admin/manage-blogs/AddBlog";
+import EditBlog from "./components/admin/manage-blogs/EditBlog";
+
+import ManageProduct from "./components/admin/manage-products/ManageProduct";
+import AddProduct from "./components/admin/manage-products/AddProduct";
+import EditProduct from "./components/admin/manage-products/EditProduct";
+
+import AddProductCategory from "./components/admin/manage-products/AddProductCategory";
+import AddSubProductCategory from "./components/admin/manage-products/AddSubProductCategory";
+
+import ProductGrid from "./components/products/ProductGrid";
+import ProductDetails from "./components/products/ProductDetails";
+
+import "./App.css";
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="*" element={<NotFound />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/users" element={<Users />} />
+
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/services" element={<Services />} />
+
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/verify-otp" element={<OTPVerification />} />
+
+        <Route path="/blogs" element={<BlogList />} />
+        <Route path="/blogs/:slug" element={<BlogDetails />} />
+
+        <Route
+          path="/admin/manage-blog-categories"
+          element={<ManageBlogCategories />}
+        />
+        <Route
+          path="/admin/add-blog-category"
+          element={<AddEditBlogCategory />}
+        />
+        <Route
+          path="/admin/edit-blog-category/:id"
+          element={<AddEditBlogCategory />}
+        />
+
+        <Route path="/admin/manage-blogs" element={<ManageBlogs />} />
+        <Route path="/admin/add-blog" element={<AddBlog />} />
+        <Route path="/admin/edit-blog/:slug" element={<EditBlog />} />
+        
+        <Route path="/admin/manage-product" element={<ManageProduct />} />
+        <Route path="/admin/add-product" element={<AddProduct />} />
+        <Route path="/edit-product/:id" element={<EditProduct />} />
+
+        <Route path="/admin/add-category" element={<AddProductCategory />} />
+        <Route path="/admin/add-subcategory" element={<AddSubProductCategory />} />
+
+        <Route path="/all-products" element={<ProductGrid />} />
+        <Route path="/product/:id" element={<ProductDetails />} />
+      
+      </Routes>
+      <Footer />
+    </Router>
   );
-}
+};
 
 export default App;
