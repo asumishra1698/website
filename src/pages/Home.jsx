@@ -49,7 +49,12 @@ const Home = () => {
           <h2 className="text-4xl font-bold text-gray-800 mb-4">About Us</h2>
           <p className="text-lg text-gray-600">
             We are a technology-driven company providing top-notch eCommerce,
-            UX/UI design, and legal services.
+            UX/UI design, and legal services. Lorem ipsum dolor sit amet
+            consectetur adipisicing elit. Voluptatum minus enim quaerat earum
+            dignissimos in ratione blanditiis totam porro. Eveniet, at quasi?
+            Praesentium adipisci itaque commodi provident ipsam ratione nemo
+            voluptatem nam, nobis fuga est obcaecati corrupti voluptates.
+            Accusamus, quasi.
           </p>
         </div>
       </section>
@@ -94,7 +99,31 @@ const Home = () => {
             </SwiperSlide>
             <SwiperSlide className="service-card bg-white shadow-lg rounded-lg p-6 text-center">
               <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                Legal Services
+                Digital Marketing
+              </h3>
+              <p className="text-gray-600">
+                Business registrations and compliance.
+              </p>
+            </SwiperSlide>
+            <SwiperSlide className="service-card bg-white shadow-lg rounded-lg p-6 text-center">
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                Shopify Store Design
+              </h3>
+              <p className="text-gray-600">
+                Business registrations and compliance.
+              </p>
+            </SwiperSlide>
+            <SwiperSlide className="service-card bg-white shadow-lg rounded-lg p-6 text-center">
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                Wordpress Store Design
+              </h3>
+              <p className="text-gray-600">
+                Business registrations and compliance.
+              </p>
+            </SwiperSlide>
+            <SwiperSlide className="service-card bg-white shadow-lg rounded-lg p-6 text-center">
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                Meta Ads
               </h3>
               <p className="text-gray-600">
                 Business registrations and compliance.

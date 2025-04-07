@@ -4,7 +4,6 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import "./HeroSlider.css"; // Add styles if needed
 
 const HeroSlider = ({ slides }) => {
   return (
@@ -19,12 +18,15 @@ const HeroSlider = ({ slides }) => {
         {slides.map((slide, index) => (
           <SwiperSlide key={index}>
             <div
-              className="hero-slide"
+              className="relative h-[500px] bg-cover bg-center flex items-center justify-center"
               style={{ backgroundImage: `url(${slide.image})` }}
             >
-              <div className="hero-overlay">
-                <h1>{slide.title}</h1>
-                <p>{slide.description}</p>
+              <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+              <div className="relative z-10 text-center text-white px-4">
+                <h1 className="text-4xl md:text-6xl font-bold mb-4">
+                  {slide.title}
+                </h1>
+                <p className="text-lg md:text-xl">{slide.description}</p>
               </div>
             </div>
           </SwiperSlide>
