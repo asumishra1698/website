@@ -3,16 +3,22 @@ const dotenv = require("dotenv");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const connectDB = require("./config/db");
+
 const authRoutes = require("./routes/authRoutes");
+const contactRoutes = require("./routes/contactRoutes");
+
 const blogRoutes = require("./routes/blogRoutes");
 const blogCategoryRoutes = require("./routes/blogCategoryRoutes");
+
 const categoryRoutes = require("./routes/productCategoryRoutes");
 const subCategoryRoutes = require("./routes/productSubCategoryRoutes");
 
 
 const productRoutes = require("./routes/productRoutes");
-const errorHandler = require("./middlewares/errorMiddleware");
+const productBulkUploadRoutes = require("./routes/productBulkUploadRoutes");
 
+
+const errorHandler = require("./middlewares/errorMiddleware");
 
 const path = require("path");
 
@@ -28,6 +34,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use("/api/auth", authRoutes);
+app.use("/api", contactRoutes);
 
 app.use("/api/categories", categoryRoutes);
 app.use("/api/subcategories", subCategoryRoutes);
@@ -36,6 +43,7 @@ app.use("/api/blogs", blogRoutes);
 app.use("/api/blog-categories", blogCategoryRoutes);
 
 app.use("/api/products", productRoutes);
+app.use("/api/products", productBulkUploadRoutes);
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;

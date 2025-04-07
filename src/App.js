@@ -16,6 +16,7 @@ import Footer from "./reuseable/Footer";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import ThankYou from "./pages/ThankYou";
 import Services from "./pages/Services";
 
 import ManageBlogCategories from "./components/admin/manage-blogs/ManageBlogCategories";
@@ -28,10 +29,13 @@ import EditBlog from "./components/admin/manage-blogs/EditBlog";
 
 import ManageProduct from "./components/admin/manage-products/ManageProduct";
 import AddProduct from "./components/admin/manage-products/AddProduct";
+import BulkUploadProducts from "./components/admin/manage-products/BulkUploadproducts";
 import EditProduct from "./components/admin/manage-products/EditProduct";
 
 import AddProductCategory from "./components/admin/manage-products/AddProductCategory";
 import AddSubProductCategory from "./components/admin/manage-products/AddSubProductCategory";
+
+import ManageContacts from "./components/admin/manage-contacts/ManageContacts";
 
 import ProductGrid from "./components/products/ProductGrid";
 import ProductDetails from "./components/products/ProductDetails";
@@ -49,8 +53,11 @@ const App = () => {
 
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
         <Route path="/services" element={<Services />} />
+
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/thank-you" element={<ThankYou />} />
+        <Route path="/admin/manage-contacts" element={<ManageContacts />} />
 
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
@@ -80,6 +87,7 @@ const App = () => {
         
         <Route path="/admin/manage-product" element={<ManageProduct />} />
         <Route path="/admin/add-product" element={<AddProduct />} />
+        <Route path="/admin/products/bulk-upload" element={<BulkUploadProducts />} />
         <Route path="/edit-product/:id" element={<EditProduct />} />
 
         <Route path="/admin/add-category" element={<AddProductCategory />} />

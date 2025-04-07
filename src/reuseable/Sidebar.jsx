@@ -68,11 +68,11 @@ const Sidebar = () => {
             </li>
             <li>
               <Link
-                to="/admin/manage-services"
+                to="/admin/manage-contacts"
                 className="flex items-center p-2 hover:bg-gray-700 rounded"
               >
                 <FaConciergeBell className="mr-3" />
-                Services
+                All Contacts
               </Link>
             </li>
             <li>

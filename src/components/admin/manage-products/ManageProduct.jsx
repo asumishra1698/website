@@ -75,85 +75,112 @@ const ProductList = () => {
       <Sidebar />
       <main className="main-content p-6 bg-gray-100 min-h-screen">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold">Product List</h2>
-          <button
-            onClick={() => navigate("/admin/add-product")}
-            className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            + Add New Product
-          </button>
+          <h2 className="text-3xl font-bold text-gray-800">Product List</h2>
+          <div className="flex gap-4">
+            <button
+              onClick={() => navigate("/admin/add-product")}
+              className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              + Add New Product
+            </button>
+            <button
+              onClick={() => navigate("/admin/products/bulk-upload")}
+              className="px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-lg shadow hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+            >
+              Bulk Upload
+            </button>
+          </div>
         </div>
-        <table className="min-w-full bg-white border border-gray-200">
-          <thead>
-            <tr className="bg-gray-100">
-              <th className="border p-2">Image</th>
-              <th className="border p-2">Name</th>
-              <th className="border p-2">Price</th>
-              <th className="border p-2">Status</th>
-              <th className="border p-2">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {products.length > 0 ? (
-              products.map((product) => (
-                <tr key={product._id} className="border">
-                  <td className="border p-2">
-                    <img
-                      src={`http://localhost:5000/${
-                        product.productImage
-                          .replace(/\\/g, "/")
-                          .split("backend/")[1]
-                      }`}
-                      alt="Product"
-                      className="h-16 w-16 object-cover"
-                    />
-                  </td>
-                  <td className="border p-2">{product.productName}</td>
-                  <td className="border p-2">
-                    Rs.{product.salePrice || product.regularPrice}
-                  </td>
-                  <td className="border p-2">
-                    <span
-                      className={
-                        product.isActive ? "text-green-500" : "text-red-500"
-                      }
-                    >
-                      {product.isActive ? "Active" : "Inactive"}
-                    </span>
-                  </td>
-                  <td className="border p-2 flex gap-2">
-                    <Link
-                      to={`/edit-product/${product._id}`}
-                      className="bg-blue-500 text-white px-3 py-1 rounded"
-                    >
-                      Edit
-                    </Link>
-                    <button
-                      onClick={() => handleDelete(product._id)}
-                      className="bg-red-500 text-white px-3 py-1 rounded"
-                    >
-                      Delete
-                    </button>
-                    <button
-                      onClick={() =>
-                        toggleStatus(product._id, product.isActive)
-                      }
-                      className="bg-yellow-500 text-white px-3 py-1 rounded"
-                    >
-                      {product.isActive ? "Deactivate" : "Activate"}
-                    </button>
+        <div className="overflow-x-auto">
+          <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
+            <thead>
+              <tr className="bg-gray-100">
+                <th className="border p-4 text-left text-sm font-medium text-gray-600">
+                  Image
+                </th>
+                <th className="border p-4 text-left text-sm font-medium text-gray-600">
+                  Name
+                </th>
+                <th className="border p-4 text-left text-sm font-medium text-gray-600">
+                  Price
+                </th>
+                <th className="border p-4 text-left text-sm font-medium text-gray-600">
+                  Status
+                </th>
+                <th className="border p-4 text-left text-sm font-medium text-gray-600">
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {products.length > 0 ? (
+                products.map((product) => (
+                  <tr
+                    key={product._id}
+                    className="border hover:bg-gray-50 transition"
+                  >
+                    <td className="border p-4">
+                      <img
+                        src={`http://localhost:5000/${
+                          product.productImage
+                            .replace(/\\/g, "/")
+                            .split("backend/")[1]
+                        }`}
+                        alt="Product"
+                        className="h-16 w-16 object-cover rounded-md"
+                      />
+                    </td>
+                    <td className="border p-4 text-gray-800">
+                      {product.productName}
+                    </td>
+                    <td className="border p-4 text-gray-800">
+                      Rs.{product.salePrice || product.regularPrice}
+                    </td>
+                    <td className="border p-4">
+                      <label className="inline-flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          className="sr-only peer"
+                          checked={product.isActive}
+                          onChange={() =>
+                            toggleStatus(product._id, product.isActive)
+                          }
+                        />
+                        <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:bg-blue-600 transition-all"></div>
+                        <span className="ml-2 text-sm font-medium text-gray-900">
+                          {product.isActive ? "Active" : "Inactive"}
+                        </span>
+                      </label>
+                    </td>
+                    <td className="border p-4 flex gap-2">
+                      <Link
+                        to={`/edit-product/${product._id}`}
+                        className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition"
+                      >
+                        Edit
+                      </Link>
+                      <button
+                        onClick={() => handleDelete(product._id)}
+                        className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition"
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td
+                    colSpan="5"
+                    className="text-center text-gray-500 p-6 font-medium"
+                  >
+                    No products found.
                   </td>
                 </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="5" className="text-center text-gray-500 p-4">
-                  No products found.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+              )}
+            </tbody>
+          </table>
+        </div>
       </main>
     </div>
   );
