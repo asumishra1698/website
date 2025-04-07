@@ -21,7 +21,7 @@ const About = () => {
         />
       </div>
 
-      <section className="bg-gray-50 py-16">
+      <section className="bg-gray-100 py-16">
         <div className="container mx-auto flex flex-col md:flex-row items-center gap-8 px-6">
           <div className="md:w-1/2">
             <img
@@ -48,7 +48,7 @@ const About = () => {
         </div>
       </section>
 
-      <section className="bg-gray-50 py-16">
+      <section className="bg-white-100 py-16">
         <div className="container mx-auto flex flex-col md:flex-row items-center gap-8 px-6">
           <div className="md:w-1/2 text-center md:text-left">
             <h2 className="text-3xl font-bold text-gray-800 mb-4">
