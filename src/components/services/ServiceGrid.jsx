@@ -9,7 +9,7 @@ const ServiceGrid = () => {
   useEffect(() => {
     const loadServices = async () => {
       try {
-        const data = await fetchAllServices(); // Fetch all services
+        const data = await fetchAllServices();
         setServices(data);
       } catch (error) {
         console.error("Error fetching services:", error);

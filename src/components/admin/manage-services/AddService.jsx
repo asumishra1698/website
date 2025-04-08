@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import slugify from "slugify";
 import { createService } from "../../../services/ServiceService";
 import { fetchCategories } from "../../../services/ServiceCategoryService"; // Ensure this points to the correct service category API
 import Sidebar from "../../../reuseable/Sidebar";
@@ -40,6 +41,10 @@ const AddService = () => {
     setFormData((prev) => ({
       ...prev,
       [name]: value,
+      slug:
+        name === "h1Title"
+          ? slugify(value, { lower: true, strict: true })
+          : prev.slug,
     }));
   };
 
@@ -90,7 +95,8 @@ const AddService = () => {
             onChange={handleChange}
             placeholder="Slug"
             required
-            className="w-full p-2 border rounded mb-2"
+            readOnly
+            className="w-full p-3 border rounded-lg bg-gray-200 mb-2"
           />
 
           <textarea

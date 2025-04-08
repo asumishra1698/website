@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { fetchServiceBySlug } from "../../services/ServiceService";
 import HeroSlider from "../../reuseable/HeroSlider";
 import SEO from "../../reuseable/SEO";
+import ServiceSidebar from "./ServiceSidebar";
 
 const ServiceDetail = () => {
   const { slug } = useParams(); // Get the slug from the URL
@@ -34,17 +35,17 @@ const ServiceDetail = () => {
     return <p className="text-center text-gray-500">Service not found.</p>;
   }
 
-  const aboutSlides = [
+  const serviceSlides = [
     {
       image: "https://iqsetters.com/assets/bg-image3.jpg",
       title: service.h1Title,
       description: "Empowering your business with cutting-edge technology.",
     },
   ];
-
+  
   return (
     <>
-      <HeroSlider slides={aboutSlides} />
+      <HeroSlider slides={serviceSlides} />
       <SEO title={service.h1Title} description={service.shortDescription} />
       <div className="flex flex-col lg:flex-row min-h-screen bg-gray-100">
         {/* Main Content */}
@@ -68,28 +69,7 @@ const ServiceDetail = () => {
         </main>
 
         {/* Sidebar */}
-        <aside className="w-full lg:w-1/4 bg-white shadow-md p-6">
-          <h3 className="text-xl font-bold text-gray-800 mb-4">
-            Related Services
-          </h3>
-          <ul className="space-y-4">
-            <li>
-              <a href="#" className="text-blue-600 hover:underline">
-                Service 1
-              </a>
-            </li>
-            <li>
-              <a href="#" className="text-blue-600 hover:underline">
-                Service 2
-              </a>
-            </li>
-            <li>
-              <a href="#" className="text-blue-600 hover:underline">
-                Service 3
-              </a>
-            </li>
-          </ul>
-        </aside>
+        <ServiceSidebar />
       </div>
     </>
   );
