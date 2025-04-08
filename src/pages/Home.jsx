@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import HeroSlider from "../reuseable/HeroSlider";
+import SEO from "../reuseable/SEO";
 import {
   Accordion,
   AccordionItem,
@@ -42,6 +43,11 @@ const Home = () => {
     <div className="home-container">
       {/* Hero Slider */}
       <HeroSlider slides={homeSlides} />
+
+      <SEO
+        title="Home Page | My Website"
+        description="website designing and development, eCommerce solutions, and legal services."
+      />
 
       {/* About Section */}
       <section className="about py-16 bg-gray-50">

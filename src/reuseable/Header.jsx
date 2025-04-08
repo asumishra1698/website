@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { FaFacebookF, FaTwitter, FaInstagram } from "react-icons/fa";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,45 +10,166 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar">
-      <div className="logo">
-        <Link to="/">Website</Link>
+    <>
+      {/* Top Bar */}
+      <div className="bg-gray-800 text-white py-2">
+        <div className="container mx-auto flex justify-between items-center px-4">
+          <p className="text-sm">Call us: +1 234 567 890</p>
+          <div className="flex gap-4">
+            <a href="#" className="text-sm hover:text-blue-400">
+              <FaFacebookF />
+            </a>
+            <a href="#" className="text-sm hover:text-blue-400">
+              <FaTwitter />
+            </a>
+            <a href="#" className="text-sm hover:text-blue-400">
+              <FaInstagram />
+            </a>
+          </div>
+        </div>
       </div>
 
-      {/* Desktop Menu */}
-      <ul className={`nav-links ${isOpen ? "open" : ""}`}>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/about">About</Link>
-        </li>
-        <li>
-          <Link to="/services">Services</Link>
-        </li>
-        <li>
-          <Link to="/all-products">All Products</Link>
-        </li>
-        <li>
-          <Link to="/blogs">Blogs</Link>
-        </li>
-        <li>
-          <Link to="/contact">Contact</Link>
-        </li>
-        <li>
-          <Link to="/login" className="login-btn">
-            Login
-          </Link>
-        </li>
-      </ul>
+      {/* Sticky Navbar */}
+      <nav className="navbar bg-white shadow-md sticky top-0 z-50">
+        <div className="container mx-auto flex justify-between items-center px-4 py-2">
+          {/* Logo */}
+          <div className="logo text-xl font-bold">
+            <Link to="/">Website</Link>
+          </div>
 
-      {/* Mobile Menu Button */}
-      <div className="hamburger" onClick={toggleMenu}>
-        <span className={isOpen ? "bar open" : "bar"}></span>
-        <span className={isOpen ? "bar open" : "bar"}></span>
-        <span className={isOpen ? "bar open" : "bar"}></span>
+          {/* Desktop Menu */}
+          <ul className="hidden md:flex gap-6 items-center">
+            <li>
+              <Link to="/" className="hover:text-blue-600">
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link to="/about" className="hover:text-blue-600">
+                About
+              </Link>
+            </li>
+            <li>
+              <Link to="/services" className="hover:text-blue-600">
+                Services
+              </Link>
+            </li>
+            <li>
+              <Link to="/all-products" className="hover:text-blue-600">
+                All Products
+              </Link>
+            </li>
+            <li>
+              <Link to="/blogs" className="hover:text-blue-600">
+                Blogs
+              </Link>
+            </li>
+            <li>
+              <Link to="/contact" className="hover:text-blue-600">
+                Contact
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/login"
+                className="login-btn bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+              >
+                Login
+              </Link>
+            </li>
+          </ul>
+
+          {/* Mobile Menu Button */}
+          <div className="hamburger md:hidden" onClick={toggleMenu}>
+            <span
+              className={`bar block w-6 h-0.5 bg-black mb-1 transition-transform ${
+                isOpen ? "rotate-45 translate-y-1" : ""
+              }`}
+            ></span>
+            <span
+              className={`bar block w-6 h-0.5 bg-black mb-1 transition-opacity ${
+                isOpen ? "opacity-0" : ""
+              }`}
+            ></span>
+            <span
+              className={`bar block w-6 h-0.5 bg-black transition-transform ${
+                isOpen ? "-rotate-45 -translate-y-1" : ""
+              }`}
+            ></span>
+          </div>
+        </div>
+      </nav>
+
+      {/* Sidebar Menu */}
+      <div
+        className={`fixed top-0 left-0 h-full w-64 bg-gray-800 text-white transform ${
+          isOpen ? "translate-x-0" : "-translate-x-full"
+        } transition-transform duration-300 ease-in-out z-50`}
+      >
+        <div className="flex justify-between items-center px-4 py-4 border-b border-gray-700">
+          <h2 className="text-lg font-bold">Menu</h2>
+          <button
+            className="text-white text-2xl focus:outline-none"
+            onClick={toggleMenu}
+          >
+            &times;
+          </button>
+        </div>
+        <ul className="flex flex-col gap-4 px-4 py-6">
+          <li>
+            <Link to="/" className="hover:text-blue-400" onClick={toggleMenu}>
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link to="/about" className="hover:text-blue-400" onClick={toggleMenu}>
+              About
+            </Link>
+          </li>
+          <li>
+            <Link to="/services" className="hover:text-blue-400" onClick={toggleMenu}>
+              Services
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/all-products"
+              className="hover:text-blue-400"
+              onClick={toggleMenu}
+            >
+              All Products
+            </Link>
+          </li>
+          <li>
+            <Link to="/blogs" className="hover:text-blue-400" onClick={toggleMenu}>
+              Blogs
+            </Link>
+          </li>
+          <li>
+            <Link to="/contact" className="hover:text-blue-400" onClick={toggleMenu}>
+              Contact
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/login"
+              className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+              onClick={toggleMenu}
+            >
+              Login
+            </Link>
+          </li>
+        </ul>
       </div>
-    </nav>
+
+      {/* Overlay */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-40"
+          onClick={toggleMenu}
+        ></div>
+      )}
+    </>
   );
 };
 

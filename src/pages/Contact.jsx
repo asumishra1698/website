@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { createContact } from "../services/ContactService";
 import { useNavigate } from "react-router-dom";
+import SEO from "../reuseable/SEO";
 import HeroSlider from "../reuseable/HeroSlider";
 
 const ContactUs = () => {
@@ -39,17 +40,21 @@ const ContactUs = () => {
   return (
     <>
       <HeroSlider slides={contactSlides} />
+      <SEO
+        title="Contact Us Page | My Website"
+        description="Contact Us for inquiries, support, and assistance. We're here to help you!"
+      />
       <div className="bg-gray-100 min-h-screen">
         <div className="max-w-7xl mx-auto p-6">
           <h2 className="text-4xl font-bold text-center text-gray-800 mb-8">
-            Contact Us
+            Get in Touch with Us
           </h2>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Contact Details and Map */}
             <div className="bg-white p-6 rounded-lg shadow-lg">
               <h3 className="text-2xl font-semibold text-gray-700 mb-4">
-                Get in Touch
+                Contact Information
               </h3>
               <p className="text-gray-600 mb-6">
                 Feel free to reach out to us for any inquiries or assistance.
