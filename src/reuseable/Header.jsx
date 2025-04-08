@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaFacebookF, FaTwitter, FaInstagram } from "react-icons/fa";
+import { FaFacebookF, FaTwitter, FaInstagram, FaUser } from "react-icons/fa";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,17 +12,17 @@ const Navbar = () => {
   return (
     <>
       {/* Top Bar */}
-      <div className="bg-gray-800 text-white py-2">
-        <div className="container mx-auto flex justify-between items-center px-4">
+      <div className="bg-[#005677] text-white py-2">
+        <div className="w-full flex justify-between items-center px-6 lg:px-16">
           <p className="text-sm">Call us: +1 234 567 890</p>
           <div className="flex gap-4">
-            <a href="#" className="text-sm hover:text-blue-400">
+            <a href="#" className="text-sm hover:text-blue-400 transition">
               <FaFacebookF />
             </a>
-            <a href="#" className="text-sm hover:text-blue-400">
+            <a href="#" className="text-sm hover:text-blue-400 transition">
               <FaTwitter />
             </a>
-            <a href="#" className="text-sm hover:text-blue-400">
+            <a href="#" className="text-sm hover:text-blue-400 transition">
               <FaInstagram />
             </a>
           </div>
@@ -31,53 +31,72 @@ const Navbar = () => {
 
       {/* Sticky Navbar */}
       <nav className="navbar bg-white shadow-md sticky top-0 z-50">
-        <div className="container mx-auto flex justify-between items-center px-4 py-2">
+        <div className="w-full flex justify-between items-center px-6 lg:px-16 py-3">
           {/* Logo */}
-          <div className="logo text-xl font-bold">
+          <div className="logo text-2xl font-bold text-gray-800">
             <Link to="/">Website</Link>
           </div>
 
           {/* Desktop Menu */}
-          <ul className="hidden md:flex gap-6 items-center">
+          <ul className="hidden md:flex gap-8 items-center justify-center flex-grow">
             <li>
-              <Link to="/" className="hover:text-blue-600">
+              <Link
+                to="/"
+                className="hover:text-blue-600 transition duration-300"
+              >
                 Home
               </Link>
             </li>
             <li>
-              <Link to="/about" className="hover:text-blue-600">
+              <Link
+                to="/about"
+                className="hover:text-blue-600 transition duration-300"
+              >
                 About
               </Link>
             </li>
             <li>
-              <Link to="/services" className="hover:text-blue-600">
+              <Link
+                to="/services"
+                className="hover:text-blue-600 transition duration-300"
+              >
                 Services
               </Link>
             </li>
             <li>
-              <Link to="/all-products" className="hover:text-blue-600">
+              <Link
+                to="/all-products"
+                className="hover:text-blue-600 transition duration-300"
+              >
                 All Products
               </Link>
             </li>
             <li>
-              <Link to="/blogs" className="hover:text-blue-600">
+              <Link
+                to="/blogs"
+                className="hover:text-blue-600 transition duration-300"
+              >
                 Blogs
               </Link>
             </li>
             <li>
-              <Link to="/contact" className="hover:text-blue-600">
+              <Link
+                to="/contact"
+                className="hover:text-blue-600 transition duration-300"
+              >
                 Contact
               </Link>
             </li>
-            <li>
-              <Link
-                to="/login"
-                className="login-btn bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
-              >
-                Login
-              </Link>
-            </li>
           </ul>
+
+          {/* Login Button */}
+          <Link
+            to="/login"
+            className="hidden md:flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+          >
+            <FaUser />
+            Login
+          </Link>
 
           {/* Mobile Menu Button */}
           <div className="hamburger md:hidden" onClick={toggleMenu}>
@@ -122,12 +141,20 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/about" className="hover:text-blue-400" onClick={toggleMenu}>
+            <Link
+              to="/about"
+              className="hover:text-blue-400"
+              onClick={toggleMenu}
+            >
               About
             </Link>
           </li>
           <li>
-            <Link to="/services" className="hover:text-blue-400" onClick={toggleMenu}>
+            <Link
+              to="/services"
+              className="hover:text-blue-400"
+              onClick={toggleMenu}
+            >
               Services
             </Link>
           </li>
@@ -141,21 +168,30 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/blogs" className="hover:text-blue-400" onClick={toggleMenu}>
+            <Link
+              to="/blogs"
+              className="hover:text-blue-400"
+              onClick={toggleMenu}
+            >
               Blogs
             </Link>
           </li>
           <li>
-            <Link to="/contact" className="hover:text-blue-400" onClick={toggleMenu}>
+            <Link
+              to="/contact"
+              className="hover:text-blue-400"
+              onClick={toggleMenu}
+            >
               Contact
             </Link>
           </li>
           <li>
             <Link
               to="/login"
-              className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+              className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
               onClick={toggleMenu}
             >
+              <FaUser />
               Login
             </Link>
           </li>

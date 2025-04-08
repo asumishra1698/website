@@ -32,6 +32,29 @@ const HeroSlider = ({ slides }) => {
           </SwiperSlide>
         ))}
       </Swiper>
+      <style jsx>{`
+        .swiper-button-next,
+        .swiper-button-prev {
+          width: 40px;
+          height: 40px;
+          color: white;
+          background-color: rgba(0, 0, 0, 0.5);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .swiper-button-next:hover,
+        .swiper-button-prev:hover {
+          background-color: rgba(254, 254, 254, 0.8);
+        }
+
+        .swiper-button-next::after,
+        .swiper-button-prev::after {
+          font-size: 20px;
+        }
+      `}</style>
     </section>
   );
 };

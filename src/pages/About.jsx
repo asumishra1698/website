@@ -14,12 +14,10 @@ const About = () => {
   return (
     <>
       <HeroSlider slides={aboutSlides} />
-      <div className="home-container">
-        <SEO
-          title="About Us Page | My Website"
-          description="Learn more about our company."
-        />
-      </div>
+      <SEO
+        title="About Us Page | My Website"
+        description="Learn more about our company."
+      />
 
       <section className="bg-gray-100 py-16">
         <div className="container mx-auto flex flex-col md:flex-row items-center gap-8 px-6">

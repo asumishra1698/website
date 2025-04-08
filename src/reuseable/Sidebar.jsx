@@ -20,7 +20,7 @@ const Sidebar = () => {
   };
 
   return (
-    <aside className="w-64 bg-gray-800 text-white min-h-screen">
+    <aside className="w-64 bg-[#005677] text-white min-h-screen">
       <div className="p-5">
         <h3 className="text-2xl font-semibold mb-5">
           <Link to="/dashboard" className="hover:text-gray-300">

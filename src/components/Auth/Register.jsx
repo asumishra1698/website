@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import SEO from "../../reuseable/SEO";
 import { BASE_URL } from "../../config";
-import "../../App.css";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -13,7 +12,6 @@ const Register = () => {
   });
 
   const { name, email, password } = formData;
-  const [message, setMessage] = useState(""); // Message for success/error
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -26,7 +24,6 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setMessage("");
 
     try {
       const response = await fetch(`${BASE_URL}/register`, {
@@ -58,19 +55,23 @@ const Register = () => {
   };
 
   return (
-    <div className="auth-container">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <SEO
         title="Register Page | My Website"
         description="Create an account."
       />
-
-      <div className="auth-box">
-        <h2>Register</h2>
-        {message && <p className="message">{message}</p>}{" "}
-        {/* Display success/error message */}
+      <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
+        <h2 className="text-2xl font-bold text-gray-800 text-center mb-6">
+          Register
+        </h2>
         <form onSubmit={handleSubmit}>
-          <div className="input-group">
-            <label htmlFor="name">Name</label>
+          <div className="mb-4">
+            <label
+              htmlFor="name"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Name
+            </label>
             <input
               type="text"
               name="name"
@@ -78,11 +79,17 @@ const Register = () => {
               value={name}
               onChange={handleChange}
               required
+              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
 
-          <div className="input-group">
-            <label htmlFor="email">Email</label>
+          <div className="mb-4">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Email
+            </label>
             <input
               type="email"
               name="email"
@@ -90,11 +97,17 @@ const Register = () => {
               value={email}
               onChange={handleChange}
               required
+              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
 
-          <div className="input-group">
-            <label htmlFor="password">Password</label>
+          <div className="mb-4">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Password
+            </label>
             <input
               type="password"
               name="password"
@@ -102,16 +115,29 @@ const Register = () => {
               value={password}
               onChange={handleChange}
               required
+              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
 
-          <button type="submit" className="auth-btn" disabled={loading}>
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300"
+            disabled={loading}
+          >
             {loading ? "Registering..." : "Register"}
           </button>
 
-          <p className="auth-links">
-            Already have an account? <Link to="/login">Login</Link>
-          </p>
+          <div className="mt-4 text-center">
+            <p className="text-sm text-gray-600">
+              Already have an account?{" "}
+              <Link
+                to="/login"
+                className="text-blue-600 hover:underline hover:text-blue-700"
+              >
+                Login
+              </Link>
+            </p>
+          </div>
         </form>
       </div>
     </div>

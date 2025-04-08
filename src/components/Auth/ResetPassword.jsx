@@ -60,37 +60,59 @@ const ResetPassword = () => {
   };
 
   return (
-    <div className="auth-container">
-      <div className="auth-box">
-        <h2>Reset Password</h2>
-        <p>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
+        <h2 className="text-2xl font-bold text-gray-800 text-center mb-4">
+          Reset Password
+        </h2>
+        <p className="text-sm text-gray-600 text-center mb-6">
           Reset password for <strong>{email}</strong>
         </p>
 
-        {error && <p className="error">{error}</p>}
+        {error && (
+          <p className="text-sm text-red-600 text-center mb-4">{error}</p>
+        )}
 
         <form onSubmit={handleSubmit}>
-          <div className="input-group">
-            <label>New Password</label>
+          <div className="mb-4">
+            <label
+              htmlFor="newPassword"
+              className="block text-sm font-medium text-gray-700"
+            >
+              New Password
+            </label>
             <input
               type="password"
+              id="newPassword"
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
               required
+              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
 
-          <div className="input-group">
-            <label>Confirm Password</label>
+          <div className="mb-4">
+            <label
+              htmlFor="confirmPassword"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Confirm Password
+            </label>
             <input
               type="password"
+              id="confirmPassword"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
+              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
 
-          <button type="submit" className="auth-btn" disabled={loading}>
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300"
+            disabled={loading}
+          >
             {loading ? "Resetting..." : "Reset Password"}
           </button>
         </form>
