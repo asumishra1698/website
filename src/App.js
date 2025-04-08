@@ -17,7 +17,6 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import ThankYou from "./pages/ThankYou";
-import Services from "./pages/Services";
 
 import ManageBlogCategories from "./components/admin/manage-blogs/ManageBlogCategories";
 import AddEditBlogCategory from "./components/admin/manage-blogs/AddEditBlogCategory";
@@ -40,6 +39,13 @@ import ManageContacts from "./components/admin/manage-contacts/ManageContacts";
 import ProductGrid from "./components/products/ProductGrid";
 import ProductDetails from "./components/products/ProductDetails";
 
+import AddService from "./components/admin/manage-services/AddService";
+import ManageServiceCategories from "./components/admin/manage-services/ManageServiceCategories";
+import ManageService from "./components/admin/manage-services/ManageService";
+import EditService from "./components/admin/manage-services/EditService";
+import ServiceDetail from "./components/services/ServiceDetail";
+import ServiceGrid from "./components/services/ServiceGrid";
+
 import "./App.css";
 
 const App = () => {
@@ -53,7 +59,7 @@ const App = () => {
 
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/services" element={<Services />} />
+        {/* <Route path="/services" element={<Services />} /> */}
 
         <Route path="/contact" element={<Contact />} />
         <Route path="/thank-you" element={<ThankYou />} />
@@ -84,18 +90,33 @@ const App = () => {
         <Route path="/admin/manage-blogs" element={<ManageBlogs />} />
         <Route path="/admin/add-blog" element={<AddBlog />} />
         <Route path="/admin/edit-blog/:slug" element={<EditBlog />} />
-        
+
         <Route path="/admin/manage-product" element={<ManageProduct />} />
         <Route path="/admin/add-product" element={<AddProduct />} />
-        <Route path="/admin/products/bulk-upload" element={<BulkUploadProducts />} />
+        <Route
+          path="/admin/products/bulk-upload"
+          element={<BulkUploadProducts />}
+        />
         <Route path="/edit-product/:id" element={<EditProduct />} />
 
         <Route path="/admin/add-category" element={<AddProductCategory />} />
-        <Route path="/admin/add-subcategory" element={<AddSubProductCategory />} />
+        <Route
+          path="/admin/add-subcategory"
+          element={<AddSubProductCategory />}
+        />
 
         <Route path="/all-products" element={<ProductGrid />} />
         <Route path="/product/:id" element={<ProductDetails />} />
-      
+
+        <Route path="/admin/add-service" element={<AddService />} />
+        <Route
+          path="/admin/manage-service-categories"
+          element={<ManageServiceCategories />}
+        />
+        <Route path="/admin/manage-services" element={<ManageService />} />
+        <Route path="/edit-service/:slug" element={<EditService />} />
+        <Route path="/services/:slug" element={<ServiceDetail />} />
+        <Route path="/services" element={<ServiceGrid />} />
       </Routes>
       <Footer />
     </Router>

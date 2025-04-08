@@ -1,7 +1,15 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaUsers, FaThList, FaBlog, FaConciergeBell, FaFileAlt, FaBoxes, FaBoxOpen, FaSignOutAlt } from 'react-icons/fa';
-
+import {
+  FaUsers,
+  FaThList,
+  FaBlog,
+  FaConciergeBell,
+  FaFileAlt,
+  FaBoxes,
+  FaBoxOpen,
+  FaSignOutAlt,
+} from "react-icons/fa";
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -77,14 +85,24 @@ const Sidebar = () => {
             </li>
             <li>
               <Link
-                to="/admin/manage-pages"
+                to="/admin/manage-service-categories"
                 className="flex items-center p-2 hover:bg-gray-700 rounded"
               >
                 <FaFileAlt className="mr-3" />
-                Pages
+                Services Categories
               </Link>
             </li>
-            
+
+            <li>
+              <Link
+                to="/admin/manage-services"
+                className="flex items-center p-2 hover:bg-gray-700 rounded"
+              >
+                <FaFileAlt className="mr-3" />
+                Services
+              </Link>
+            </li>
+
             <li>
               <button
                 onClick={handleLogout}

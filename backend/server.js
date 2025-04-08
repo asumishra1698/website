@@ -17,6 +17,8 @@ const subCategoryRoutes = require("./routes/productSubCategoryRoutes");
 const productRoutes = require("./routes/productRoutes");
 const productBulkUploadRoutes = require("./routes/productBulkUploadRoutes");
 
+const serviceRoutes = require("./routes/serviceRoutes");
+const serviceCategoryRoutes = require("./routes/serviceCategoryRoutes");
 
 const errorHandler = require("./middlewares/errorMiddleware");
 
@@ -44,6 +46,10 @@ app.use("/api/blog-categories", blogCategoryRoutes);
 
 app.use("/api/products", productRoutes);
 app.use("/api/products", productBulkUploadRoutes);
+
+app.use("/api/services", serviceRoutes);
+app.use("/api/service-categories", serviceCategoryRoutes);
+
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
