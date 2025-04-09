@@ -10,7 +10,8 @@ import {
   AccordionContent,
 } from "@radix-ui/react-accordion";
 import { Plus, Minus } from "lucide-react";
-import { fetchAllServices } from "../services/ServiceService"; // Import your service fetching function
+import { fetchAllServices } from "../services/ServiceService"; 
+import { fetchAllTestimonials } from "../services/TestimonialService";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -36,6 +37,7 @@ const Home = () => {
 
   const [openItem, setOpenItem] = useState(null);
   const [services, setServices] = useState([]);
+  const [testimonials, setTestimonials] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const toggleItem = (item) => {
@@ -55,6 +57,21 @@ const Home = () => {
     };
 
     fetchServices();
+  }, []);
+
+  useEffect(() => {
+    const fetchTestimonials = async () => {
+      try {
+        const data = await fetchAllTestimonials();
+        setTestimonials(data);
+      } catch (error) {
+        console.error("Error fetching testimonials:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTestimonials();
   }, []);
 
   return (
@@ -136,87 +153,72 @@ const Home = () => {
           <h2 className="text-4xl font-bold text-gray-800 mb-8">
             What Our Clients Say
           </h2>
-          <Swiper
-            modules={[Navigation, Pagination, Autoplay]}
-            spaceBetween={20}
-            slidesPerView={1}
-            navigation
-            pagination={{ clickable: true }}
-            autoplay={{ delay: 3000 }}
-            breakpoints={{
-              768: { slidesPerView: 2 },
-              1024: { slidesPerView: 3 },
-            }}
-          >
-            {/* Testimonial 1 */}
-            <SwiperSlide className="testimonial bg-white shadow-lg rounded-lg p-6 flex flex-col items-center">
-              <img
-                src="https://api-iqwebsite.iqsetters.in/uploads/clients/contact_profile_image-1710691782977-993334352.jpg"
-                alt="John Doe"
-                className="w-24 h-24 rounded-full mb-4"
-              />
-              <h4 className="text-lg font-semibold text-gray-800">John Doe</h4>
-              <p className="text-sm text-gray-500 mb-2">CEO of TechCorp</p>
-              <p className="text-gray-600 mb-4">
-                "Excellent service and support! Highly recommended."
-              </p>
-              <div className="flex justify-center">
-                {[...Array(5)].map((_, i) => (
-                  <svg
-                    key={i}
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                    className="w-5 h-5 text-yellow-500"
-                  >
-                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                  </svg>
-                ))}
-              </div>
-            </SwiperSlide>
-
-            {/* Testimonial 2 */}
-            <SwiperSlide className="testimonial bg-white shadow-lg rounded-lg p-6 flex flex-col items-center">
-              <img
-                src="https://api-iqwebsite.iqsetters.in/uploads/clients/contact_profile_image-1710691782977-993334352.jpg"
-                alt="Jane Smith"
-                className="w-24 h-24 rounded-full mb-4"
-              />
-              <h4 className="text-lg font-semibold text-gray-800">
-                Jane Smith
-              </h4>
-              <p className="text-sm text-gray-500 mb-2">Founder of E-Shop</p>
-              <p className="text-gray-600 mb-4">
-                "Their team helped us scale our business efficiently."
-              </p>
-              <div className="flex justify-center">
-                {[...Array(4)].map((_, i) => (
-                  <svg
-                    key={i}
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                    className="w-5 h-5 text-yellow-500"
-                  >
-                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                  </svg>
-                ))}
-                {[...Array(1)].map((_, i) => (
-                  <svg
-                    key={i}
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                    className="w-5 h-5 text-gray-300"
-                  >
-                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                  </svg>
-                ))}
-              </div>
-            </SwiperSlide>
-          </Swiper>
+          {loading ? (
+            <p className="text-gray-500">Loading testimonials...</p>
+          ) : testimonials.length === 0 ? (
+            <p className="text-gray-500">No testimonials available.</p>
+          ) : (
+            <Swiper
+              modules={[Navigation, Pagination, Autoplay]}
+              spaceBetween={20}
+              slidesPerView={1}
+              navigation
+              pagination={{ clickable: true }}
+              autoplay={{ delay: 3000 }}
+              breakpoints={{
+                768: { slidesPerView: 2 },
+                1024: { slidesPerView: 3 },
+              }}
+            >
+              {testimonials.map((testimonial) => (
+                <SwiperSlide
+                  key={testimonial._id}
+                  className="testimonial bg-white shadow-lg rounded-lg p-6 flex flex-col items-center"
+                >
+                  <img
+                    src={`${testimonial.profileImage}`}
+                    alt={testimonial.name}
+                    className="w-24 h-24 rounded-full mb-4"
+                  />
+                  <h4 className="text-lg font-semibold text-gray-800">
+                    {testimonial.name}
+                  </h4>
+                  <p className="text-sm text-gray-500 mb-2">
+                    {testimonial.designation}
+                  </p>
+                  <p className="text-gray-600 mb-4">{testimonial.comment}</p>
+                  <div className="flex justify-center">
+                    {[...Array(parseInt(testimonial.rating))].map((_, i) => (
+                      <svg
+                        key={i}
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                        className="w-5 h-5 text-yellow-500"
+                      >
+                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                      </svg>
+                    ))}
+                    {[...Array(5 - parseInt(testimonial.rating))].map(
+                      (_, i) => (
+                        <svg
+                          key={i}
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          viewBox="0 0 24 24"
+                          className="w-5 h-5 text-gray-300"
+                        >
+                          <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                        </svg>
+                      )
+                    )}
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          )}
         </div>
       </section>
 

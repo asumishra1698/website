@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { createTestimonial } from "../../../services/TestimonialService";
+import {
+  fetchTestimonialById,
+  updateTestimonial,
+} from "../../../services/TestimonialService";
 import Sidebar from "../../../reuseable/Sidebar";
 
-const AddTestimonial = () => {
+const EditTestimonial = () => {
+  const { id } = useParams(); // Get the testimonial ID from the URL
   const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     name: "",
     designation: "",
@@ -14,6 +19,38 @@ const AddTestimonial = () => {
   });
 
   const [profileImage, setProfileImage] = useState(null);
+  const [existingImage, setExistingImage] = useState("");
+  const [loading, setLoading] = useState(true); // Add a loading state
+
+  // Fetch the testimonial data on component mount
+  useEffect(() => {
+    const loadTestimonial = async () => {
+      try {
+        const data = await fetchTestimonialById(id);
+        setFormData({
+          name: data.name || "",
+          designation: data.designation || "",
+          comment: data.comment || "",
+          rating: data.rating || 5,
+        });
+        setExistingImage(data.profileImage || ""); // Store the existing profile image
+      } catch (error) {
+        console.error("Error fetching testimonial:", error);
+        toast.error("Failed to load testimonial.");
+      } finally {
+        setLoading(false); // Ensure loading is set to false after data is fetched or if there's an error
+      }
+    };
+
+    loadTestimonial();
+  }, [id]);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+    }
+  }, [navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -35,31 +72,37 @@ const AddTestimonial = () => {
       formDataToSend.append(key, formData[key]);
     });
 
-    if (profileImage) formDataToSend.append("profileImage", profileImage);
+    if (profileImage) {
+      formDataToSend.append("profileImage", profileImage); // Add new profile image if selected
+    }
 
     try {
-      await createTestimonial(formDataToSend);
-      toast.success("Testimonial added successfully!");
+      await updateTestimonial(id, formDataToSend);
+      toast.success("Testimonial updated successfully!");
       navigate("/admin/manage-testimonials");
     } catch (error) {
-      console.error("Error adding testimonial:", error);
-      toast.error("Failed to add testimonial.");
+      console.error("Error updating testimonial:", error);
+      toast.error("Failed to update testimonial.");
     }
   };
 
-  // Check if user is logged in
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      navigate("/login");
-    }
-  }, [navigate]);
+  if (loading) {
+    return (
+      <div className="dashboard-container">
+        <Sidebar />
+        <main className="main-content p-6 bg-gray-100 min-h-screen">
+          <h2 className="text-2xl font-bold mb-4">Edit Testimonial</h2>
+          <p>Loading...</p>
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div className="dashboard-container">
       <Sidebar />
       <main className="main-content p-6 bg-gray-100 min-h-screen">
-        <h2 className="text-2xl font-bold mb-4">Add Testimonial</h2>
+        <h2 className="text-2xl font-bold mb-4">Edit Testimonial</h2>
         <form onSubmit={handleSubmit} encType="multipart/form-data">
           <input
             type="text"
@@ -105,6 +148,17 @@ const AddTestimonial = () => {
             ))}
           </select>
 
+          {existingImage && (
+            <div className="mb-4">
+              <p>Current Profile Image:</p>
+              <img
+                src={`${existingImage}`} // Prepend base URL
+                alt="Current Profile"
+                className="h-24 w-24 object-cover rounded-full"
+              />
+            </div>
+          )}
+
           <input
             type="file"
             onChange={handleImageChange}
@@ -115,7 +169,7 @@ const AddTestimonial = () => {
             type="submit"
             className="bg-blue-500 text-white px-4 py-2 rounded"
           >
-            Add Testimonial
+            Update Testimonial
           </button>
         </form>
       </main>
@@ -123,4 +177,4 @@ const AddTestimonial = () => {
   );
 };
 
-export default AddTestimonial;
+export default EditTestimonial;

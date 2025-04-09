@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { fetchAllTestimonials, deleteTestimonial } from "../../../services/TestimonialService";
+import {
+  fetchAllTestimonials,
+  deleteTestimonial,
+} from "../../../services/TestimonialService";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
@@ -66,7 +69,9 @@ const ManageTestimonials = () => {
 
       <main className="main-content p-6 bg-gray-100 min-h-screen">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-semibold text-gray-700">Manage Testimonials</h2>
+          <h2 className="text-2xl font-semibold text-gray-700">
+            Manage Testimonials
+          </h2>
           <button
             onClick={() => navigate("/admin/add-testimonial")}
             className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -87,9 +92,9 @@ const ManageTestimonials = () => {
                 className="p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition"
               >
                 <img
-                  src={`http://localhost:5000/${testimonial.profileImage}`}
+                  src={testimonial.profileImage}
                   alt={testimonial.name}
-                  className="h-24 w-24 object-cover rounded-full mx-auto mb-4"
+                  className="h-24 w-24 object-cover rounded-full"
                 />
                 <h3 className="text-lg font-bold text-gray-800 text-center">
                   {testimonial.name}
@@ -102,7 +107,9 @@ const ManageTestimonials = () => {
                 </p>
                 <div className="flex justify-between items-center mt-4">
                   <button
-                    onClick={() => navigate(`/edit-testimonial/${testimonial._id}`)}
+                    onClick={() =>
+                      navigate(`/admin/edit-testimonial/${testimonial._id}`)
+                    }
                     className="text-blue-600 hover:text-blue-800"
                   >
                     ✏️ Edit

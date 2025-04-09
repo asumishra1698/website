@@ -4,9 +4,41 @@ const Testimonial = require("../models/Testimonial");
 exports.getAllTestimonials = async (req, res) => {
   try {
     const testimonials = await Testimonial.find();
-    res.status(200).json(testimonials);
+    const updatedTestimonials = testimonials.map((testimonial) => ({
+      ...testimonial._doc,
+      profileImage: testimonial.profileImage
+        ? `${req.protocol}://${req.get(
+            "host"
+          )}/${testimonial.profileImage.replace(/\\/g, "/")}`
+        : null, 
+    }));
+
+    res.status(200).json(updatedTestimonials);
   } catch (error) {
+    console.error("Error fetching testimonials:", error);
     res.status(500).json({ error: "Failed to fetch testimonials" });
+  }
+};
+
+// Get a single testimonial by ID
+exports.getTestimonialById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const testimonial = await Testimonial.findById(id);
+
+    if (!testimonial) {
+      return res.status(404).json({ error: "Testimonial not found" });
+    }   
+    testimonial.profileImage = testimonial.profileImage
+      ? `${req.protocol}://${req.get(
+          "host"
+        )}/${testimonial.profileImage.replace(/\\/g, "/")}`
+      : null;
+
+    res.status(200).json(testimonial);
+  } catch (error) {
+    console.error("Error fetching testimonial by ID:", error);
+    res.status(500).json({ error: "Failed to fetch testimonial" });
   }
 };
 
@@ -14,12 +46,13 @@ exports.getAllTestimonials = async (req, res) => {
 exports.addTestimonial = async (req, res) => {
   try {
     const { name, designation, comment, rating } = req.body;
-    const profileImage = req.file ? req.file.path : null;
+    const profileImage = req.file
+      ? `uploads/profile-images/${req.file.filename}`.replace(/\\/g, "/")
+      : null;
 
     if (!name || !designation || !comment || !rating || !profileImage) {
       return res.status(400).json({ error: "All fields are required." });
     }
-
     const newTestimonial = new Testimonial({
       name,
       designation,
@@ -40,13 +73,42 @@ exports.addTestimonial = async (req, res) => {
 exports.updateTestimonial = async (req, res) => {
   try {
     const { id } = req.params;
+    const { name, designation, comment, rating } = req.body;
+
+    
+    const profileImage = req.file
+      ? `uploads/profile-images/${req.file.filename}`.replace(/\\/g, "/")
+      : undefined;
+  
+    const updatedData = {
+      name,
+      designation,
+      comment,
+      rating,
+    };
+ 
+    if (profileImage) {
+      updatedData.profileImage = profileImage;
+    }
     const updatedTestimonial = await Testimonial.findByIdAndUpdate(
       id,
-      req.body,
+      updatedData,
       { new: true }
     );
+
+    if (!updatedTestimonial) {
+      return res.status(404).json({ error: "Testimonial not found" });
+    }
+
+    updatedTestimonial.profileImage = updatedTestimonial.profileImage
+      ? `${req.protocol}://${req.get("host")}/${
+          updatedTestimonial.profileImage
+        }`
+      : null;
+
     res.status(200).json(updatedTestimonial);
   } catch (error) {
+    console.error("Error updating testimonial:", error);
     res.status(500).json({ error: "Failed to update testimonial" });
   }
 };
@@ -55,9 +117,15 @@ exports.updateTestimonial = async (req, res) => {
 exports.deleteTestimonial = async (req, res) => {
   try {
     const { id } = req.params;
-    await Testimonial.findByIdAndDelete(id);
+    const deletedTestimonial = await Testimonial.findByIdAndDelete(id);
+
+    if (!deletedTestimonial) {
+      return res.status(404).json({ error: "Testimonial not found" });
+    }
+
     res.status(200).json({ message: "Testimonial deleted successfully" });
   } catch (error) {
+    console.error("Error deleting testimonial:", error);
     res.status(500).json({ error: "Failed to delete testimonial" });
   }
 };

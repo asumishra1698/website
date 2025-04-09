@@ -49,7 +49,7 @@ import ServiceGrid from "./components/services/ServiceGrid";
 
 import AddTestimonial from "./components/admin/manage-testimonials/AddTestimonial";
 import ManageTestimonials from "./components/admin/manage-testimonials/ManageTestimonials"; // Create this component for listing testimonials
-
+import EditTestimonial from "./components/admin/manage-testimonials/EditTestimonial";
 
 import "./App.css";
 
@@ -128,6 +128,10 @@ const App = () => {
         <Route
           path="/admin/manage-testimonials"
           element={<ManageTestimonials />}
+        />
+        <Route
+          path="/admin/edit-testimonial/:id"
+          element={<EditTestimonial />}
         />
       </Routes>
       <Footer />

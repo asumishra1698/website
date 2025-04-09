@@ -2,6 +2,7 @@ const express = require("express");
 const {
   getAllTestimonials,
   addTestimonial,
+  getTestimonialById,
   updateTestimonial,
   deleteTestimonial,
 } = require("../controllers/testimonialController");
@@ -11,8 +12,9 @@ const router = express.Router();
 
 // Routes
 router.get("/", getAllTestimonials);
+router.get("/:id", getTestimonialById);
 router.post("/", upload.single("profileImage"), addTestimonial);
-router.put("/:id", updateTestimonial);
+router.put("/:id", upload.single("profileImage"), updateTestimonial);
 router.delete("/:id", deleteTestimonial);
 
 module.exports = router;
