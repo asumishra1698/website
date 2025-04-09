@@ -1,0 +1,126 @@
+import React, { useEffect, useState } from "react";
+import { fetchAllTestimonials, deleteTestimonial } from "../../../services/TestimonialService";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
+import Sidebar from "../../../reuseable/Sidebar";
+
+const ManageTestimonials = () => {
+  const [testimonials, setTestimonials] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+
+  // Check if user is logged in
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+    }
+  }, [navigate]);
+
+  // Fetch all testimonials
+  useEffect(() => {
+    const fetchTestimonials = async () => {
+      try {
+        const data = await fetchAllTestimonials();
+        setTestimonials(data);
+      } catch (error) {
+        console.error("Error fetching testimonials:", error);
+        toast.error("Failed to load testimonials.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchTestimonials();
+  }, []);
+
+  // Handle delete action
+  const handleDelete = async (id) => {
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+    });
+
+    if (!result.isConfirmed) return;
+
+    try {
+      await deleteTestimonial(id);
+      setTestimonials((prevTestimonials) =>
+        prevTestimonials.filter((testimonial) => testimonial._id !== id)
+      );
+      toast.success("Testimonial deleted successfully!");
+    } catch (error) {
+      console.error("Error deleting testimonial:", error);
+      toast.error("Failed to delete testimonial.");
+    }
+  };
+
+  return (
+    <div className="dashboard-container">
+      <Sidebar />
+
+      <main className="main-content p-6 bg-gray-100 min-h-screen">
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-2xl font-semibold text-gray-700">Manage Testimonials</h2>
+          <button
+            onClick={() => navigate("/admin/add-testimonial")}
+            className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            + Add New Testimonial
+          </button>
+        </div>
+
+        {loading ? (
+          <p className="text-gray-500">Loading testimonials...</p>
+        ) : testimonials.length === 0 ? (
+          <p className="text-gray-500">No testimonials available.</p>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {testimonials.map((testimonial) => (
+              <div
+                key={testimonial._id}
+                className="p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition"
+              >
+                <img
+                  src={`http://localhost:5000/${testimonial.profileImage}`}
+                  alt={testimonial.name}
+                  className="h-24 w-24 object-cover rounded-full mx-auto mb-4"
+                />
+                <h3 className="text-lg font-bold text-gray-800 text-center">
+                  {testimonial.name}
+                </h3>
+                <p className="text-sm text-gray-600 text-center">
+                  {testimonial.designation}
+                </p>
+                <p className="text-sm text-gray-600 mt-2">
+                  {testimonial.comment.substring(0, 100)}...
+                </p>
+                <div className="flex justify-between items-center mt-4">
+                  <button
+                    onClick={() => navigate(`/edit-testimonial/${testimonial._id}`)}
+                    className="text-blue-600 hover:text-blue-800"
+                  >
+                    ✏️ Edit
+                  </button>
+                  <button
+                    onClick={() => handleDelete(testimonial._id)}
+                    className="text-red-600 hover:text-red-800"
+                  >
+                    🗑 Delete
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </main>
+    </div>
+  );
+};
+
+export default ManageTestimonials;

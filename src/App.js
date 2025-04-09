@@ -47,6 +47,10 @@ import EditService from "./components/admin/manage-services/EditService";
 import ServiceDetail from "./components/services/ServiceDetail";
 import ServiceGrid from "./components/services/ServiceGrid";
 
+import AddTestimonial from "./components/admin/manage-testimonials/AddTestimonial";
+import ManageTestimonials from "./components/admin/manage-testimonials/ManageTestimonials"; // Create this component for listing testimonials
+
+
 import "./App.css";
 
 const App = () => {
@@ -119,6 +123,12 @@ const App = () => {
         <Route path="/edit-service/:slug" element={<EditService />} />
         <Route path="/services/:slug" element={<ServiceDetail />} />
         <Route path="/services" element={<ServiceGrid />} />
+
+        <Route path="/admin/add-testimonial" element={<AddTestimonial />} />
+        <Route
+          path="/admin/manage-testimonials"
+          element={<ManageTestimonials />}
+        />
       </Routes>
       <Footer />
     </Router>

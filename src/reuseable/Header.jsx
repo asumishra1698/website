@@ -21,13 +21,13 @@ const Navbar = () => {
         <div className="w-full flex justify-between items-center px-6 lg:px-16">
           <p className="text-sm">Call us: +1 234 567 890</p>
           <div className="flex gap-4">
-            <a href="#" className="text-sm hover:text-blue-400 transition">
+            <a href="/" className="text-sm hover:text-blue-400 transition">
               <FaFacebookF />
             </a>
-            <a href="#" className="text-sm hover:text-blue-400 transition">
+            <a href="/" className="text-sm hover:text-blue-400 transition">
               <FaTwitter />
             </a>
-            <a href="#" className="text-sm hover:text-blue-400 transition">
+            <a href="/" className="text-sm hover:text-blue-400 transition">
               <FaInstagram />
             </a>
           </div>
