@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NotFound from "./components/PageNotFound";
+import ScrollToTop from "./reuseable/ScrollToTop";
 import Dashboard from "./components/admin/Dashboard";
 import Users from "./components/admin/Users";
 
@@ -51,6 +52,7 @@ import "./App.css";
 const App = () => {
   return (
     <Router>
+      <ScrollToTop />
       <Navbar />
       <Routes>
         <Route path="*" element={<NotFound />} />

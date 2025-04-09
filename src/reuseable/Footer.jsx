@@ -76,7 +76,7 @@ const Footer = () => {
 
         {/* Footer Bottom */}
         <div className="footer-bottom">
-          <p>© {new Date().getFullYear()} Gonard Web. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} iqsetters. All rights reserved.</p>
         </div>
       </div>
     </footer>

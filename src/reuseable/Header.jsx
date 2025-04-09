@@ -3,10 +3,15 @@ import { Link } from "react-router-dom";
 import { FaFacebookF, FaTwitter, FaInstagram, FaUser } from "react-icons/fa";
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false); // State for mobile sidebar menu
+  const [isServicesOpen, setIsServicesOpen] = useState(false); // State for Services dropdown in sidebar
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+  };
+
+  const toggleServicesMenu = () => {
+    setIsServicesOpen(!isServicesOpen);
   };
 
   return (
@@ -55,13 +60,148 @@ const Navbar = () => {
                 About
               </Link>
             </li>
-            <li>
+            <li className="relative group">
               <Link
                 to="/services"
-                className="hover:text-blue-600 transition duration-300"
+                className="hover:text-blue-600 transition duration-300 flex items-center gap-2"
               >
                 Services
               </Link>
+              <div className="absolute left-1/2 transform -translate-x-1/2 mt-2 bg-white shadow-lg rounded-lg w-[1100px] p-6 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 group-hover:visible invisible transition-all duration-300 z-50">
+                <div className="grid grid-cols-4 gap-6">
+                  {/* Column 1 */}
+                  <div>
+                    <h3 className="text-lg font-bold text-gray-800 mb-4">
+                      Web Services
+                    </h3>
+                    <ul>
+                      <li>
+                        <Link
+                          to="/services/the-art-of-fashion-design-blending-creativity-with-innovation"
+                          className="block px-2 py-1 hover:bg-blue-100 hover:text-blue-600 rounded"
+                        >
+                          Web Design
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/services/"
+                          className="block px-2 py-1 hover:bg-blue-100 hover:text-blue-600 rounded"
+                        >
+                          Web Development
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/services/"
+                          className="block px-2 py-1 hover:bg-blue-100 hover:text-blue-600 rounded"
+                        >
+                          SEO Services
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
+
+                  {/* Column 2 */}
+                  <div>
+                    <h3 className="text-lg font-bold text-gray-800 mb-4">
+                      Marketing
+                    </h3>
+                    <ul>
+                      <li>
+                        <Link
+                          to="/services/"
+                          className="block px-2 py-1 hover:bg-blue-100 hover:text-blue-600 rounded"
+                        >
+                          Digital Marketing
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/services/"
+                          className="block px-2 py-1 hover:bg-blue-100 hover:text-blue-600 rounded"
+                        >
+                          Social Media Marketing
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/services/"
+                          className="block px-2 py-1 hover:bg-blue-100 hover:text-blue-600 rounded"
+                        >
+                          Email Marketing
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
+
+                  {/* Column 3 */}
+                  <div>
+                    <h3 className="text-lg font-bold text-gray-800 mb-4">
+                      E-Commerce
+                    </h3>
+                    <ul>
+                      <li>
+                        <Link
+                          to="/services/"
+                          className="block px-2 py-1 hover:bg-blue-100 hover:text-blue-600 rounded"
+                        >
+                          Shopify Development
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/services/"
+                          className="block px-2 py-1 hover:bg-blue-100 hover:text-blue-600 rounded"
+                        >
+                          WooCommerce Development
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/services/"
+                          className="block px-2 py-1 hover:bg-blue-100 hover:text-blue-600 rounded"
+                        >
+                          Magento Development
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
+
+                  {/* Column 4 */}
+                  <div>
+                    <h3 className="text-lg font-bold text-gray-800 mb-4">
+                      Support
+                    </h3>
+                    <ul>
+                      <li>
+                        <Link
+                          to="/services/"
+                          className="block px-2 py-1 hover:bg-blue-100 hover:text-blue-600 rounded"
+                        >
+                          Website Maintenance
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/services/"
+                          className="block px-2 py-1 hover:bg-blue-100 hover:text-blue-600 rounded"
+                        >
+                          IT Consulting
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/services/"
+                          className="block px-2 py-1 hover:bg-blue-100 hover:text-blue-600 rounded"
+                        >
+                          Training & Workshops
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
             </li>
             <li>
               <Link
@@ -119,7 +259,7 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Sidebar Menu */}
+      {/* Mobile Sidebar Menu */}
       <div
         className={`fixed top-0 left-0 h-full w-64 bg-gray-800 text-white transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
@@ -150,13 +290,44 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link
-              to="/services"
-              className="hover:text-blue-400"
-              onClick={toggleMenu}
+            <button
+              onClick={toggleServicesMenu}
+              className="flex justify-between items-center w-full text-left hover:text-blue-400"
             >
               Services
-            </Link>
+              <span>{isServicesOpen ? "-" : "+"}</span>
+            </button>
+            {isServicesOpen && (
+              <ul className="pl-4 mt-2">
+                <li>
+                  <Link
+                    to="/services/web-design"
+                    className="block hover:text-blue-400"
+                    onClick={toggleMenu}
+                  >
+                    Web Design
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/services/web-development"
+                    className="block hover:text-blue-400"
+                    onClick={toggleMenu}
+                  >
+                    Web Development
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/services/seo"
+                    className="block hover:text-blue-400"
+                    onClick={toggleMenu}
+                  >
+                    SEO Services
+                  </Link>
+                </li>
+              </ul>
+            )}
           </li>
           <li>
             <Link
