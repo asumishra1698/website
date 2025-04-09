@@ -25,7 +25,7 @@ const EditService = () => {
   useEffect(() => {
     loadService();
     loadCategories();
-  }, []);
+  },);
 
   const loadService = async () => {
     try {

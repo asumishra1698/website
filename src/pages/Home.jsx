@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import HeroSlider from "../reuseable/HeroSlider";
@@ -10,6 +10,7 @@ import {
   AccordionContent,
 } from "@radix-ui/react-accordion";
 import { Plus, Minus } from "lucide-react";
+import { fetchAllServices } from "../services/ServiceService"; // Import your service fetching function
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -34,10 +35,29 @@ const Home = () => {
   ];
 
   const [openItem, setOpenItem] = useState(null);
+  const [services, setServices] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+
 
   const toggleItem = (item) => {
     setOpenItem(openItem === item ? null : item);
   };
+
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const data = await fetchAllServices();
+        setServices(data);
+      } catch (error) {
+        console.error("Error fetching services:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchServices();
+  }, []);
 
   return (
     <div className="home-container">
@@ -71,71 +91,43 @@ const Home = () => {
           <h2 className="text-4xl font-bold text-center text-gray-800 mb-8">
             Our Services
           </h2>
-          <Swiper
-            modules={[Navigation, Pagination, Autoplay]}
-            spaceBetween={20}
-            slidesPerView={1}
-            navigation
-            pagination={{ clickable: true }}
-            autoplay={{ delay: 3000 }}
-            breakpoints={{
-              768: { slidesPerView: 2 },
-              1024: { slidesPerView: 3 },
-            }}
-          >
-            <SwiperSlide className="service-card bg-white shadow-lg rounded-lg p-6 text-center">
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                Web Development
-              </h3>
-              <p className="text-gray-600">
-                Custom websites with modern UX/UI.
-              </p>
-            </SwiperSlide>
-            <SwiperSlide className="service-card bg-white shadow-lg rounded-lg p-6 text-center">
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                E-Commerce Solutions
-              </h3>
-              <p className="text-gray-600">End-to-end eCommerce development.</p>
-            </SwiperSlide>
-            <SwiperSlide className="service-card bg-white shadow-lg rounded-lg p-6 text-center">
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                SEO Optimization
-              </h3>
-              <p className="text-gray-600">Boost your online presence.</p>
-            </SwiperSlide>
-            <SwiperSlide className="service-card bg-white shadow-lg rounded-lg p-6 text-center">
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                Digital Marketing
-              </h3>
-              <p className="text-gray-600">
-                Business registrations and compliance.
-              </p>
-            </SwiperSlide>
-            <SwiperSlide className="service-card bg-white shadow-lg rounded-lg p-6 text-center">
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                Shopify Store Design
-              </h3>
-              <p className="text-gray-600">
-                Business registrations and compliance.
-              </p>
-            </SwiperSlide>
-            <SwiperSlide className="service-card bg-white shadow-lg rounded-lg p-6 text-center">
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                Wordpress Store Design
-              </h3>
-              <p className="text-gray-600">
-                Business registrations and compliance.
-              </p>
-            </SwiperSlide>
-            <SwiperSlide className="service-card bg-white shadow-lg rounded-lg p-6 text-center">
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                Meta Ads
-              </h3>
-              <p className="text-gray-600">
-                Business registrations and compliance.
-              </p>
-            </SwiperSlide>
-          </Swiper>
+          {loading ? (
+            <p className="text-center text-gray-500">Loading services...</p>
+          ) : services.length === 0 ? (
+            <p className="text-center text-gray-500">No services available.</p>
+          ) : (
+            <Swiper
+              modules={[Navigation, Pagination, Autoplay]}
+              spaceBetween={20}
+              slidesPerView={1}
+              navigation
+              pagination={{ clickable: true }}
+              autoplay={{ delay: 3000 }}
+              breakpoints={{
+                768: { slidesPerView: 2 },
+                1024: { slidesPerView: 3 },
+              }}
+            >
+              {services.map((service) => (
+                <SwiperSlide
+                  key={service._id}
+                  className="service-card bg-white shadow-lg rounded-lg p-6 text-center"
+                >
+                  <img
+                    src={`http://localhost:5000/${service.image}`}
+                    alt={service.h1Title}
+                    className="h-40 w-full object-cover rounded-md mb-4"
+                  />
+                  <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                    {service.h1Title}
+                  </h3>
+                  <p className="text-gray-600">
+                    {service.shortDescription?.substring(0, 100)}...
+                  </p>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          )}
         </div>
       </section>
 
