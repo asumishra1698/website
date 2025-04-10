@@ -94,7 +94,7 @@ const ManageTestimonials = () => {
                 <img
                   src={testimonial.profileImage}
                   alt={testimonial.name}
-                  className="h-24 w-24 object-cover rounded-full"
+                  className="h-24 w-24 object-cover mx-auto rounded-full"
                 />
                 <h3 className="text-lg font-bold text-gray-800 text-center">
                   {testimonial.name}

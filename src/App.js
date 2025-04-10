@@ -1,6 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NotFound from "./components/PageNotFound";
+import MainLayout from "./components/MainLayout";
+
 import ScrollToTop from "./reuseable/ScrollToTop";
 import Dashboard from "./components/admin/Dashboard";
 import Users from "./components/admin/Users";
@@ -11,8 +13,8 @@ import ForgotPassword from "./components/Auth/ForgotPassword";
 import ResetPassword from "./components/Auth/ResetPassword";
 import OTPVerification from "./components/Auth/OTPVerification";
 
-import Navbar from "./reuseable/Header";
-import Footer from "./reuseable/Footer";
+// import Navbar from "./reuseable/Header";
+// import Footer from "./reuseable/Footer";
 
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -57,29 +59,98 @@ const App = () => {
   return (
     <Router>
       <ScrollToTop />
-      <Navbar />
       <Routes>
+        <Route
+          path="/"
+          element={
+            <MainLayout>
+              <Home />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/about"
+          element={
+            <MainLayout>
+              <About />
+            </MainLayout>
+          }
+        />
+
+        <Route
+          path="/contact"
+          element={
+            <MainLayout>
+              <Contact />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/thank-you"
+          element={
+            <MainLayout>
+              <ThankYou />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/blogs"
+          element={
+            <MainLayout>
+              <BlogList />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/all-products"
+          element={
+            <MainLayout>
+              <ProductGrid />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/product/:id"
+          element={
+            <MainLayout>
+              <ProductDetails />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/blogs/:slug"
+          element={
+            <MainLayout>
+              <BlogDetails />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/services/:slug"
+          element={
+            <MainLayout>
+              <ServiceDetail />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/services"
+          element={
+            <MainLayout>
+              <ServiceGrid />
+            </MainLayout>
+          }
+        />
+
         <Route path="*" element={<NotFound />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/users" element={<Users />} />
-
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        {/* <Route path="/services" element={<Services />} /> */}
-
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/thank-you" element={<ThankYou />} />
         <Route path="/admin/manage-contacts" element={<ManageContacts />} />
-
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/verify-otp" element={<OTPVerification />} />
-
-        <Route path="/blogs" element={<BlogList />} />
-        <Route path="/blogs/:slug" element={<BlogDetails />} />
-
         <Route
           path="/admin/manage-blog-categories"
           element={<ManageBlogCategories />}
@@ -92,11 +163,9 @@ const App = () => {
           path="/admin/edit-blog-category/:id"
           element={<AddEditBlogCategory />}
         />
-
         <Route path="/admin/manage-blogs" element={<ManageBlogs />} />
         <Route path="/admin/add-blog" element={<AddBlog />} />
         <Route path="/admin/edit-blog/:slug" element={<EditBlog />} />
-
         <Route path="/admin/manage-product" element={<ManageProduct />} />
         <Route path="/admin/add-product" element={<AddProduct />} />
         <Route
@@ -104,16 +173,11 @@ const App = () => {
           element={<BulkUploadProducts />}
         />
         <Route path="/edit-product/:id" element={<EditProduct />} />
-
         <Route path="/admin/add-category" element={<AddProductCategory />} />
         <Route
           path="/admin/add-subcategory"
           element={<AddSubProductCategory />}
         />
-
-        <Route path="/all-products" element={<ProductGrid />} />
-        <Route path="/product/:id" element={<ProductDetails />} />
-
         <Route path="/admin/add-service" element={<AddService />} />
         <Route
           path="/admin/manage-service-categories"
@@ -121,9 +185,6 @@ const App = () => {
         />
         <Route path="/admin/manage-services" element={<ManageService />} />
         <Route path="/edit-service/:slug" element={<EditService />} />
-        <Route path="/services/:slug" element={<ServiceDetail />} />
-        <Route path="/services" element={<ServiceGrid />} />
-
         <Route path="/admin/add-testimonial" element={<AddTestimonial />} />
         <Route
           path="/admin/manage-testimonials"
@@ -134,7 +195,6 @@ const App = () => {
           element={<EditTestimonial />}
         />
       </Routes>
-      <Footer />
     </Router>
   );
 };
