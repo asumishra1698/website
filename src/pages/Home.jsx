@@ -80,13 +80,15 @@ const Home = () => {
       <HeroSlider slides={homeSlides} />
 
       <SEO
-        title="Home Page | My Website"
+        title="Professional Website Development Company | GonardWeb"
         description="website designing and development, eCommerce solutions, and legal services."
+        canonical={"https://gonardweb.com"}
+        keywords="website development, eCommerce solutions, UX/UI design, legal services, GonardWeb"
       />
 
       {/* About Section */}
       <section className="about py-16 bg-gray-50">
-        <div className="max-w-5xl mx-auto px-6 text-center">
+        <div className="max-w-7xl mx-auto px-6 text-center">
           <h2 className="text-4xl font-bold text-gray-800 mb-4">About Us</h2>
           <p className="text-lg text-gray-600">
             We are a technology-driven company providing top-notch eCommerce,
@@ -102,7 +104,7 @@ const Home = () => {
 
       {/* Services Section */}
       <section className="services py-16 bg-gray-50">
-        <div className="max-w-5xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-6">
           <h2 className="text-4xl font-bold text-center text-gray-800 mb-8">
             Our Services
           </h2>
@@ -149,7 +151,7 @@ const Home = () => {
 
       {/* Testimonials Section */}
       <section className="testimonials py-16 bg-gray-50">
-        <div className="max-w-5xl mx-auto px-6 text-center">
+        <div className="max-w-7xl mx-auto px-6 text-center">
           <h2 className="text-4xl font-bold text-gray-800 mb-8">
             What Our Clients Say
           </h2>
@@ -225,7 +227,7 @@ const Home = () => {
 
       {/* FAQ Section */}
       <section className="w-full py-16 bg-gray-50">
-        <div className="max-w-5xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-6">
           <h2 className="text-4xl font-bold text-center mb-8 text-gray-800">
             Frequently Asked Questions
           </h2>
@@ -292,6 +294,104 @@ const Home = () => {
               </AccordionContent>
             </AccordionItem>
           </Accordion>
+        </div>
+      </section>
+
+      {/* New Section: Our Expertise */}
+      <section className="expertise py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-4xl font-bold text-center text-gray-800 mb-8">
+            Our Expertise
+          </h2>
+          <p className="text-center text-gray-600 mb-12">
+            With over 5+ years of experience, we specialize in delivering
+            innovative IT solutions tailored to your business needs.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Expertise Item 1 */}
+            <div className="bg-white p-6 rounded-lg shadow-lg text-center">
+              <div className="text-blue-600 text-4xl mb-4">
+                <i className="fas fa-laptop-code"></i>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                Custom Software Development
+              </h3>
+              <p className="text-gray-600">
+                We build scalable and robust software solutions tailored to your
+                business requirements.
+              </p>
+            </div>
+
+            {/* Expertise Item 2 */}
+            <div className="bg-white p-6 rounded-lg shadow-lg text-center">
+              <div className="text-red-600 text-4xl mb-4">
+                <i className="fas fa-chart-line"></i>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                Data Analytics & Insights
+              </h3>
+              <p className="text-gray-600">
+                Leverage data-driven insights to make informed business
+                decisions and drive growth.
+              </p>
+            </div>
+
+            {/* Expertise Item 3 */}
+            <div className="bg-white p-6 rounded-lg shadow-lg text-center">
+              <div className="text-green-600 text-4xl mb-4">
+                <i className="fas fa-mobile-alt"></i>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                Mobile App Development
+              </h3>
+              <p className="text-gray-600">
+                Create user-friendly mobile applications that enhance customer
+                engagement and satisfaction.
+              </p>
+            </div>
+
+            {/* Expertise Item 4 */}
+            <div className="bg-white p-6 rounded-lg shadow-lg text-center">
+              <div className="text-purple-600 text-4xl mb-4">
+                <i className="fas fa-cloud"></i>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                Cloud Solutions
+              </h3>
+              <p className="text-gray-600">
+                Optimize your business operations with secure and scalable cloud
+                solutions.
+              </p>
+            </div>
+
+            {/* Expertise Item 5 */}
+            <div className="bg-white p-6 rounded-lg shadow-lg text-center">
+              <div className="text-yellow-600 text-4xl mb-4">
+                <i className="fas fa-shield-alt"></i>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                Cybersecurity Services
+              </h3>
+              <p className="text-gray-600">
+                Protect your business from cyber threats with our advanced
+                security solutions.
+              </p>
+            </div>
+
+            {/* Expertise Item 6 */}
+            <div className="bg-white p-6 rounded-lg shadow-lg text-center">
+              <div className="text-indigo-600 text-4xl mb-4">
+                <i className="fas fa-headset"></i>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                IT Support & Maintenance
+              </h3>
+              <p className="text-gray-600">
+                Ensure seamless operations with our reliable IT support and
+                maintenance services.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
     </div>

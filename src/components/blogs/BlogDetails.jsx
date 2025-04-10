@@ -60,7 +60,7 @@ const BlogDetails = () => {
   if (loading) return <p>Loading...</p>;
 
   return (
-    <div className="container mx-auto p-6">
+    <div className="max-w-7xl mx-auto px-6 py-12 bg-white shadow-lg rounded-l">
       <button
         className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"
         onClick={() => navigate(-1)}

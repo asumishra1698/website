@@ -28,7 +28,7 @@ const ProductDetails = () => {
   };
 
   return (
-    <div className="container=fluid mx-auto p-6">
+    <div className="max-w-7xl mx-auto px-6 py-12">
       <SEO
           title={product.metaTitle}
           description={product.metaDescription}

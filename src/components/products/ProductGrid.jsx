@@ -41,10 +41,12 @@ const ProductGrid = () => {
     <>
       <HeroSlider slides={blogSlides} />
       <SEO
-        title="Latest Blogs | My Website"
-        description="Latest Blogs and Articles"
+        title="All Products | Website Desinging | Gonardweb"
+        description="Explore our range of products designed to enhance your business operations and drive success."
+        keywords="products, technology, business solutions, Gonardweb"
+        canonical="https://gonardweb.com/products"
       />
-      <div className="container-fluid mx-auto p-6">
+      <div className="max-w-7xl mx-auto px-6 py-12">
         <h2 className="text-2xl font-bold mb-4">Our Products</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {activeProducts.map((product) => (
