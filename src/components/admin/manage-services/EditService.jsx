@@ -1,13 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { fetchServiceBySlug, updateService } from "../../../services/ServiceService";
+import {
+  fetchServiceBySlug,
+  updateService,
+} from "../../../services/ServiceService";
 import { fetchCategories } from "../../../services/ServiceCategoryService";
 import Sidebar from "../../../reuseable/Sidebar";
 
 const EditService = () => {
   const { slug } = useParams(); // Get the service slug from the URL
   const navigate = useNavigate();
+
+  // State for form data
   const [formData, setFormData] = useState({
     h1Title: "",
     shortDescription: "",
@@ -18,18 +23,14 @@ const EditService = () => {
     serviceCategory: "",
   });
 
+  // State for service image and categories
   const [serviceImage, setServiceImage] = useState(null);
   const [categories, setCategories] = useState([]);
 
-  // Load service and categories on component mount
-  useEffect(() => {
-    loadService();
-    loadCategories();
-  },);
-
-  const loadService = async () => {
+  // Fetch service details by slug
+  const loadService = useCallback(async () => {
     try {
-      const data = await fetchServiceBySlug(slug); // Fetch service by slug
+      const data = await fetchServiceBySlug(slug);
       setFormData({
         h1Title: data.h1Title,
         shortDescription: data.shortDescription,
@@ -43,18 +44,26 @@ const EditService = () => {
       console.error("Error fetching service:", error);
       toast.error("Failed to load service.");
     }
-  };
+  }, [slug]);
 
-  const loadCategories = async () => {
+  // Fetch service categories
+  const loadCategories = useCallback(async () => {
     try {
-      const data = await fetchCategories(); // Fetch service categories
+      const data = await fetchCategories();
       setCategories(data);
     } catch (error) {
       console.error("Error fetching categories:", error);
       toast.error("Failed to load service categories.");
     }
-  };
+  }, []);
 
+  // Load service and categories on component mount
+  useEffect(() => {
+    loadService();
+    loadCategories();
+  }, [loadService, loadCategories]);
+
+  // Handle form input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -63,10 +72,12 @@ const EditService = () => {
     }));
   };
 
+  // Handle image file input
   const handleImageChange = (e) => {
     setServiceImage(e.target.files[0]);
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -93,6 +104,7 @@ const EditService = () => {
       <main className="main-content p-6 bg-gray-100 min-h-screen">
         <h2 className="text-2xl font-bold mb-4">Edit Service</h2>
         <form onSubmit={handleSubmit} encType="multipart/form-data">
+          {/* H1 Title */}
           <input
             type="text"
             name="h1Title"
@@ -103,6 +115,19 @@ const EditService = () => {
             className="w-full p-2 border rounded mb-2"
           />
 
+          {/* Slug */}
+          <input
+            type="text"
+            name="slug"
+            value={formData.slug}
+            onChange={handleChange}
+            placeholder="Slug"
+            required
+            readOnly
+            className="w-full p-3 border rounded-lg bg-gray-200 mb-2"
+          />
+
+          {/* Short Description */}
           <textarea
             name="shortDescription"
             value={formData.shortDescription}
@@ -112,6 +137,7 @@ const EditService = () => {
             className="w-full p-2 border rounded mb-2"
           />
 
+          {/* H2 Title */}
           <input
             type="text"
             name="h2Title"
@@ -122,6 +148,7 @@ const EditService = () => {
             className="w-full p-2 border rounded mb-2"
           />
 
+          {/* Paragraph 1 */}
           <textarea
             name="paragraph1"
             value={formData.paragraph1}
@@ -131,21 +158,12 @@ const EditService = () => {
             className="w-full p-2 border rounded mb-2"
           />
 
+          {/* Paragraph 2 */}
           <textarea
             name="paragraph2"
             value={formData.paragraph2}
             onChange={handleChange}
             placeholder="Paragraph 2"
-            required
-            className="w-full p-2 border rounded mb-2"
-          />
-
-          <input
-            type="text"
-            name="slug"
-            value={formData.slug}
-            onChange={handleChange}
-            placeholder="Slug"
             required
             className="w-full p-2 border rounded mb-2"
           />
@@ -166,12 +184,14 @@ const EditService = () => {
             ))}
           </select>
 
+          {/* Image Upload */}
           <input
             type="file"
             onChange={handleImageChange}
             className="w-full p-2 border rounded mb-2"
           />
 
+          {/* Submit Button */}
           <button
             type="submit"
             className="bg-blue-500 text-white px-4 py-2 rounded"

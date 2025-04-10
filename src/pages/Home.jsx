@@ -10,7 +10,7 @@ import {
   AccordionContent,
 } from "@radix-ui/react-accordion";
 import { Plus, Minus } from "lucide-react";
-import { fetchAllServices } from "../services/ServiceService"; 
+import { fetchAllServices } from "../services/ServiceService";
 import { fetchAllTestimonials } from "../services/TestimonialService";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -118,6 +118,7 @@ const Home = () => {
               navigation
               pagination={{ clickable: true }}
               autoplay={{ delay: 3000 }}
+              loop={true}
               breakpoints={{
                 768: { slidesPerView: 2 },
                 1024: { slidesPerView: 3 },
@@ -147,7 +148,6 @@ const Home = () => {
       </section>
 
       {/* Testimonials Section */}
-      {/* Testimonials Section */}
       <section className="testimonials py-16 bg-gray-50">
         <div className="max-w-5xl mx-auto px-6 text-center">
           <h2 className="text-4xl font-bold text-gray-800 mb-8">
@@ -165,6 +165,7 @@ const Home = () => {
               navigation
               pagination={{ clickable: true }}
               autoplay={{ delay: 3000 }}
+              loop={true}
               breakpoints={{
                 768: { slidesPerView: 2 },
                 1024: { slidesPerView: 3 },
@@ -178,7 +179,7 @@ const Home = () => {
                   <img
                     src={`${testimonial.profileImage}`}
                     alt={testimonial.name}
-                    className="w-24 h-24 rounded-full mb-4"
+                    className="w-24 h-24 rounded-full mb-4 mx-auto"
                   />
                   <h4 className="text-lg font-semibold text-gray-800">
                     {testimonial.name}
@@ -223,7 +224,7 @@ const Home = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="w-full bg-gray-50 py-16">
+      <section className="w-full py-16 bg-gray-50">
         <div className="max-w-5xl mx-auto px-6">
           <h2 className="text-4xl font-bold text-center mb-8 text-gray-800">
             Frequently Asked Questions
