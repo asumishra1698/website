@@ -56,10 +56,8 @@ const ManageTestimonials = () => {
       setTestimonials((prevTestimonials) =>
         prevTestimonials.filter((testimonial) => testimonial._id !== id)
       );
-      toast.success("Testimonial deleted successfully!");
     } catch (error) {
       console.error("Error deleting testimonial:", error);
-      toast.error("Failed to delete testimonial.");
     }
   };
 

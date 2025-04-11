@@ -89,12 +89,11 @@ const EditService = () => {
     if (serviceImage) formDataToSend.append("image", serviceImage);
 
     try {
-      await updateService(slug, formDataToSend); // Update service by slug
-      toast.success("Service updated successfully!");
+      await updateService(slug, formDataToSend);
+
       navigate("/admin/manage-services");
     } catch (error) {
       console.error("Error updating service:", error);
-      toast.error("Failed to update service.");
     }
   };
 

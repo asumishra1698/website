@@ -63,12 +63,10 @@ const AddService = () => {
     if (serviceImage) formDataToSend.append("image", serviceImage);
 
     try {
-      await createService(formDataToSend);
-      toast.success("Service added successfully!");
+      await createService(formDataToSend);     
       navigate("/admin/manage-services");
     } catch (error) {
-      console.error("Error adding service:", error);
-      toast.error("Failed to add service.");
+      console.error("Error adding service:", error);      
     }
   };
 

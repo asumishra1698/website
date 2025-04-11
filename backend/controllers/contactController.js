@@ -1,8 +1,33 @@
 const Contact = require("../models/Contacts");
 
+// ✅ Fetch all contact submissions
+export const fetchAllContacts = async () => {
+  try {
+    const response = await axios.get(API_URL);
+    return response.data;
+  } catch (error) {
+    const errorMessage = error.response?.data?.error || "Failed to fetch contacts.";
+    console.error("Error fetching contacts:", error);
+    toast.error(errorMessage);
+    throw error;
+  }
+};
+
 // Create a new contact
 const createContact = async (req, res) => {
   try {
+    const { phone, message } = req.body;
+
+    if (phone && phone.length > 12) {
+      return res
+        .status(400)
+        .json({ error: "Phone number cannot exceed 12 digits" });
+    }
+
+    if (message && message.split(" ").length > 15) {
+      return res.status(400).json({ error: "Message cannot exceed 25 words" });
+    }
+
     const contact = new Contact(req.body);
     await contact.save();
     res.status(201).json({ message: "Contact created successfully" });

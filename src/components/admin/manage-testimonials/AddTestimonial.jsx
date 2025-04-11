@@ -38,12 +38,10 @@ const AddTestimonial = () => {
     if (profileImage) formDataToSend.append("profileImage", profileImage);
 
     try {
-      await createTestimonial(formDataToSend);
-      toast.success("Testimonial added successfully!");
+      await createTestimonial(formDataToSend);      
       navigate("/admin/manage-testimonials");
     } catch (error) {
-      console.error("Error adding testimonial:", error);
-      toast.error("Failed to add testimonial.");
+      console.error("Error adding testimonial:", error);      
     }
   };
 

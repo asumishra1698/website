@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { fetchAllServices, deleteService } from "../../../services/ServiceService";
+import {
+  fetchAllServices,
+  deleteService,
+} from "../../../services/ServiceService";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
@@ -53,10 +56,8 @@ const ManageService = () => {
       setServices((prevServices) =>
         prevServices.filter((service) => service.slug !== slug)
       );
-      toast.success("Service deleted successfully!");
     } catch (error) {
       console.error("Error deleting service:", error);
-      toast.error("Failed to delete service.");
     }
   };
 
@@ -66,7 +67,9 @@ const ManageService = () => {
 
       <main className="main-content p-6 bg-gray-100 min-h-screen">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-semibold text-gray-700">Manage Services</h2>
+          <h2 className="text-2xl font-semibold text-gray-700">
+            Manage Services
+          </h2>
           <button
             onClick={() => navigate("/admin/add-service")}
             className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"

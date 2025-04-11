@@ -33,7 +33,7 @@ const ContactUs = () => {
       navigate("/thank-you");
     } catch (error) {
       console.error("Error submitting form", error);
-      alert("Failed to send message.");
+      // alert("Failed to send message.");
     }
   };
 

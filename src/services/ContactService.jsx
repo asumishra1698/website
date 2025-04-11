@@ -24,8 +24,10 @@ export const createContact = async (contactData) => {
     toast.success("Message sent successfully!");
     return response.data;
   } catch (error) {
+    const errorMessage =
+      error.response?.data?.error || "Failed to send message.";
     console.error("Error creating contact:", error);
-    toast.error("Failed to send message.");
+    toast.error(errorMessage);
     throw error;
   }
 };

@@ -78,11 +78,9 @@ const EditTestimonial = () => {
 
     try {
       await updateTestimonial(id, formDataToSend);
-      toast.success("Testimonial updated successfully!");
       navigate("/admin/manage-testimonials");
     } catch (error) {
       console.error("Error updating testimonial:", error);
-      toast.error("Failed to update testimonial.");
     }
   };
 
