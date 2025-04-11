@@ -18,6 +18,7 @@ const productBulkUploadRoutes = require("./routes/productBulkUploadRoutes");
 const serviceRoutes = require("./routes/serviceRoutes");
 const serviceCategoryRoutes = require("./routes/serviceCategoryRoutes");
 const testimonialRoutes = require("./routes/testimonialRoutes");
+const dashboardRoutes = require("./routes/dashboardRoutes");
 
 // Load environment variables
 dotenv.config();
@@ -47,6 +48,7 @@ app.use("/api/products", productBulkUploadRoutes);
 app.use("/api/services", serviceRoutes);
 app.use("/api/service-categories", serviceCategoryRoutes);
 app.use("/api/testimonials", testimonialRoutes);
+app.use("/api/dashboard", dashboardRoutes);
 
 // Error Handling Middleware
 app.use(errorHandler);
