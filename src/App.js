@@ -13,9 +13,6 @@ import ForgotPassword from "./components/Auth/ForgotPassword";
 import ResetPassword from "./components/Auth/ResetPassword";
 import OTPVerification from "./components/Auth/OTPVerification";
 
-// import Navbar from "./reuseable/Header";
-// import Footer from "./reuseable/Footer";
-
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
