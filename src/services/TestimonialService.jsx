@@ -43,13 +43,13 @@ export const createTestimonial = async (testimonialData) => {
 // ✅ Update an existing testimonial by ID
 export const updateTestimonial = async (id, testimonialData) => {
   try {
-    await axios.put(`${API_URL}/${id}`, testimonialData, {
-      headers: { "Content-Type": "application/json" },
-    });
+    await axios.put(`${API_URL}/${id}`, testimonialData);
     toast.success("Testimonial updated successfully!");
   } catch (error) {
     console.error(`Error updating testimonial by ID (${id}):`, error);
-    toast.error("Failed to update testimonial.");
+    const errorMessage =
+      error.response?.data?.error || "Failed to update testimonial.";
+    toast.error(errorMessage);
     throw error;
   }
 };

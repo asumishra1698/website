@@ -10,7 +10,7 @@ exports.getAllTestimonials = async (req, res) => {
         ? `${req.protocol}://${req.get(
             "host"
           )}/${testimonial.profileImage.replace(/\\/g, "/")}`
-        : null, 
+        : null,
     }));
 
     res.status(200).json(updatedTestimonials);
@@ -28,7 +28,8 @@ exports.getTestimonialById = async (req, res) => {
 
     if (!testimonial) {
       return res.status(404).json({ error: "Testimonial not found" });
-    }   
+    }
+
     testimonial.profileImage = testimonial.profileImage
       ? `${req.protocol}://${req.get(
           "host"
@@ -50,9 +51,10 @@ exports.addTestimonial = async (req, res) => {
       ? `uploads/profile-images/${req.file.filename}`.replace(/\\/g, "/")
       : null;
 
-    if (!name || !designation || !comment || !rating || !profileImage) {
+    if (!name || !designation || !comment || !rating) {
       return res.status(400).json({ error: "All fields are required." });
     }
+
     const newTestimonial = new Testimonial({
       name,
       designation,
@@ -75,21 +77,21 @@ exports.updateTestimonial = async (req, res) => {
     const { id } = req.params;
     const { name, designation, comment, rating } = req.body;
 
-    
     const profileImage = req.file
       ? `uploads/profile-images/${req.file.filename}`.replace(/\\/g, "/")
       : undefined;
-  
+
     const updatedData = {
       name,
       designation,
       comment,
       rating,
     };
- 
+
     if (profileImage) {
       updatedData.profileImage = profileImage;
     }
+
     const updatedTestimonial = await Testimonial.findByIdAndUpdate(
       id,
       updatedData,
@@ -101,9 +103,9 @@ exports.updateTestimonial = async (req, res) => {
     }
 
     updatedTestimonial.profileImage = updatedTestimonial.profileImage
-      ? `${req.protocol}://${req.get("host")}/${
-          updatedTestimonial.profileImage
-        }`
+      ? `${req.protocol}://${req.get(
+          "host"
+        )}/${updatedTestimonial.profileImage.replace(/\\/g, "/")}`
       : null;
 
     res.status(200).json(updatedTestimonial);

@@ -9,7 +9,7 @@ const contactSchema = new mongoose.Schema(
       required: true,
       validate: {
         validator: function (v) {
-          return v.toString().length <= 14;
+          return v.toString().length <= 14; // Ensure phone number is at most 14 digits
         },
         message: "Phone number must not exceed 14 digits.",
       },

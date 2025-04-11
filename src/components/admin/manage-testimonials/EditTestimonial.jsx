@@ -20,7 +20,7 @@ const EditTestimonial = () => {
 
   const [profileImage, setProfileImage] = useState(null);
   const [existingImage, setExistingImage] = useState("");
-  const [loading, setLoading] = useState(true); // Add a loading state
+  const [loading, setLoading] = useState(true);
 
   // Fetch the testimonial data on component mount
   useEffect(() => {
@@ -45,6 +45,7 @@ const EditTestimonial = () => {
     loadTestimonial();
   }, [id]);
 
+  // Redirect to login if no token is found
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -52,6 +53,7 @@ const EditTestimonial = () => {
     }
   }, [navigate]);
 
+  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -60,10 +62,12 @@ const EditTestimonial = () => {
     }));
   };
 
+  // Handle image selection
   const handleImageChange = (e) => {
     setProfileImage(e.target.files[0]);
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -73,14 +77,16 @@ const EditTestimonial = () => {
     });
 
     if (profileImage) {
-      formDataToSend.append("profileImage", profileImage); // Add new profile image if selected
+      formDataToSend.append("profileImage", profileImage); // Add the new profile image
     }
 
     try {
-      await updateTestimonial(id, formDataToSend);
+      await updateTestimonial(id, formDataToSend); // Call the corrected function
+      toast.success("Testimonial updated successfully!");
       navigate("/admin/manage-testimonials");
     } catch (error) {
       console.error("Error updating testimonial:", error);
+      toast.error("Failed to update testimonial.");
     }
   };
 
@@ -150,7 +156,7 @@ const EditTestimonial = () => {
             <div className="mb-4">
               <p>Current Profile Image:</p>
               <img
-                src={`${existingImage}`} // Prepend base URL
+                src={`${existingImage}`} // Ensure the correct base URL is used
                 alt="Current Profile"
                 className="h-24 w-24 object-cover rounded-full"
               />
