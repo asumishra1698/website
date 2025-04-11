@@ -152,18 +152,18 @@ const ProductList = () => {
                         </span>
                       </label>
                     </td>
-                    <td className="border p-4 flex gap-2">
+                    <td className=" p-4 flex gap-2">
                       <Link
                         to={`/edit-product/${product._id}`}
                         className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition"
                       >
-                        Edit
+                        ✏️ Edit
                       </Link>
                       <button
                         onClick={() => handleDelete(product._id)}
                         className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition"
                       >
-                        Delete
+                        🗑 Delete
                       </button>
                     </td>
                   </tr>

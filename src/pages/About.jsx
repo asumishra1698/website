@@ -20,7 +20,7 @@ const About = () => {
       />
 
       <section className="bg-gray-100 py-16">
-        <div className="container mx-auto flex flex-col md:flex-row items-center gap-8 px-6">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-8 px-6">
           <div className="md:w-1/2">
             <img
               src="https://iqsetters.com/assets/bg-image4.jpg"
@@ -47,7 +47,7 @@ const About = () => {
       </section>
 
       <section className="bg-white-100 py-16">
-        <div className="container mx-auto flex flex-col md:flex-row items-center gap-8 px-6">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-8 px-6">
           <div className="md:w-1/2 text-center md:text-left">
             <h2 className="text-3xl font-bold text-gray-800 mb-4">
               Our Vision

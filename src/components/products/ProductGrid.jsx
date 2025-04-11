@@ -46,9 +46,9 @@ const ProductGrid = () => {
         keywords="products, technology, business solutions, Gonardweb"
         canonical="https://gonardweb.com/products"
       />
-      <div className="max-w-7xl mx-auto px-6 py-12">
-        <h2 className="text-2xl font-bold mb-4">Our Products</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="p-6 lg:p-12 bg-gray-50">
+        <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">Our Products</h2>
+        <div className="container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
           {activeProducts.map((product) => (
             <Link
               to={`/product/${product._id}`}

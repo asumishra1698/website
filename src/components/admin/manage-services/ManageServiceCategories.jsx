@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { fetchCategories, createCategory, deleteCategory } from "../../../services/ServiceCategoryService";
+import {
+  fetchCategories,
+  createCategory,
+  deleteCategory,
+} from "../../../services/ServiceCategoryService";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 import Sidebar from "../../../reuseable/Sidebar";
 
 const ManageServiceCategories = () => {
@@ -42,8 +47,17 @@ const ManageServiceCategories = () => {
   };
 
   const handleDeleteCategory = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this category?")) return;
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+    });
 
+    if (!result.isConfirmed) return;
     try {
       await deleteCategory(id);
       toast.success("Category deleted successfully!");
@@ -80,9 +94,9 @@ const ManageServiceCategories = () => {
                 <td className="p-3">
                   <button
                     onClick={() => handleDeleteCategory(category._id)}
-                    className="bg-red-500 text-white px-3 py-1 rounded"
+                    className="text-red-600 px-3 py-1 rounded"
                   >
-                    Delete
+                    🗑 Delete
                   </button>
                 </td>
               </tr>
