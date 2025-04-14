@@ -1,4 +1,4 @@
-const Contact = require("../models/Contacts");
+import Contact from "../models/Contacts.js"; // Use import for ES modules
 
 // ✅ Fetch all contact submissions
 export const fetchAllContacts = async () => {
@@ -6,7 +6,8 @@ export const fetchAllContacts = async () => {
     const response = await axios.get(API_URL);
     return response.data;
   } catch (error) {
-    const errorMessage = error.response?.data?.error || "Failed to fetch contacts.";
+    const errorMessage =
+      error.response?.data?.error || "Failed to fetch contacts.";
     console.error("Error fetching contacts:", error);
     toast.error(errorMessage);
     throw error;
@@ -14,7 +15,7 @@ export const fetchAllContacts = async () => {
 };
 
 // Create a new contact
-const createContact = async (req, res) => {
+export const createContact = async (req, res) => {
   try {
     const { phone, message } = req.body;
 
@@ -37,7 +38,7 @@ const createContact = async (req, res) => {
 };
 
 // Get all contacts
-const getContacts = async (req, res) => {
+export const getContacts = async (req, res) => {
   try {
     const contacts = await Contact.find().sort({ createdAt: -1 });
     res.status(200).json(contacts);
@@ -47,7 +48,7 @@ const getContacts = async (req, res) => {
 };
 
 // Delete a contact by ID
-const deleteContact = async (req, res) => {
+export const deleteContact = async (req, res) => {
   try {
     const { id } = req.params;
     await Contact.findByIdAndDelete(id);
@@ -56,5 +57,3 @@ const deleteContact = async (req, res) => {
     res.status(500).json({ error: "Failed to delete contact" });
   }
 };
-
-module.exports = { createContact, getContacts, deleteContact };
