@@ -1,7 +1,7 @@
 import Contact from "../models/Contacts.js"; // Use import for ES modules
 
 // ✅ Fetch all contact submissions
-export const fetchAllContacts = async () => {
+const fetchAllContacts = async () => {
   try {
     const response = await axios.get(API_URL);
     return response.data;
