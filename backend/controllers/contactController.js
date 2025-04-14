@@ -1,7 +1,7 @@
 const Contact = require("../models/Contacts");
 
 // ✅ Fetch all contact submissions
-export const fetchAllContacts = async () => {
+const fetchAllContacts = async () => {
   try {
     const response = await axios.get(API_URL);
     return response.data;
