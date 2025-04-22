@@ -4,6 +4,7 @@ import { fetchServiceBySlug } from "../../services/ServiceService";
 import HeroSlider from "../../reuseable/HeroSlider";
 import SEO from "../../reuseable/SEO";
 import ServiceSidebar from "./ServiceSidebar";
+import { BASE_URL } from "../../config";
 
 const ServiceDetail = () => {
   const { slug } = useParams(); // Get the slug from the URL
@@ -52,7 +53,7 @@ const ServiceDetail = () => {
         <main className="flex-1 p-6">
           <div className="bg-white rounded-lg shadow-md p-6">
             <img
-              src={`http://localhost:5000/${service.image}`}
+              src={`${BASE_URL}/${service.image}`}
               alt={service.h1Title}
               className="w-full h-64 object-cover rounded-md mb-6"
             />

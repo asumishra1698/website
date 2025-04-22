@@ -114,6 +114,16 @@ const Sidebar = () => {
             </li>
 
             <li>
+              <Link
+                to="/admin/manage-clients"
+                className="flex items-center p-2 hover:bg-gray-700 rounded"
+              >
+                <FaFileAlt className="mr-3" />
+                Manage Clients
+              </Link>
+            </li>
+
+            <li>
               <button
                 onClick={handleLogout}
                 className="flex items-center p-2 w-full text-left hover:bg-gray-700 rounded"

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import SEO from "../../reuseable/SEO";
 import { fetchProductById } from "../../services/ProductService";
+import { BASE_URL } from "../../config";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -37,7 +38,7 @@ const ProductDetails = () => {
         {/* Left Section: Images */}
         <div className="md:w-1/2 p-4">
           <img
-            src={`http://localhost:5000/${
+            src={`${BASE_URL}/${
               mainImage.replace(/\\/g, "/").split("backend/")[1]
             }`}
             alt={product.productName}
@@ -48,7 +49,7 @@ const ProductDetails = () => {
               {product.galleryImages.map((image, index) => (
                 <img
                   key={index}
-                  src={`http://localhost:5000/${
+                  src={`${BASE_URL}/${
                     image.replace(/\\/g, "/").split("backend/")[1]
                   }`}
                   alt={`Thumbnail ${index + 1}`}

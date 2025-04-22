@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { fetchAllProducts } from "../../services/ProductService";
 import SEO from "../../reuseable/SEO";
 import HeroSlider from "../../reuseable/HeroSlider";
+import { BASE_URL } from "../../config";
 
 const ProductGrid = () => {
   const [products, setProducts] = useState([]);
@@ -61,7 +62,7 @@ const ProductGrid = () => {
                 <img
                   src={
                     product.productImage
-                      ? `http://localhost:5000/${
+                      ? `${BASE_URL}/${
                           product.productImage
                             .replace(/\\/g, "/")
                             .split("backend/")[1]

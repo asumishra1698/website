@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import Sidebar from "../../../reuseable/Sidebar";
+import { BASE_URL } from "../../../config";
 
 const ManageService = () => {
   const [services, setServices] = useState([]);
@@ -90,7 +91,7 @@ const ManageService = () => {
                 className="p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition"
               >
                 <img
-                  src={`http://localhost:5000/${service.image}`}
+                  src={`${BASE_URL}/${service.image}`}
                   alt={service.h1Title}
                   className="h-40 w-full object-cover rounded-md mb-4"
                 />

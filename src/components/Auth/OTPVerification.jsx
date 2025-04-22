@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
+import {BASE_URL} from "../../config";
 
 const VerifyOTP = () => {
   const navigate = useNavigate();
@@ -45,7 +46,7 @@ const VerifyOTP = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/auth/verify-otp",
+        `${BASE_URL}/api/auth/verify-otp`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

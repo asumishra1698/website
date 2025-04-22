@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {BASE_URL} from "../../config"
 import {
   FaUsers,
   FaFileAlt,
@@ -35,9 +36,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          "http://localhost:5000/api/dashboard/stats"
-        );
+        const response = await fetch(`${BASE_URL}/api/dashboard/stats`);
         const data = await response.json();
         setStats(data);
       } catch (error) {

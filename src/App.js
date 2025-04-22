@@ -50,7 +50,12 @@ import AddTestimonial from "./components/admin/manage-testimonials/AddTestimonia
 import ManageTestimonials from "./components/admin/manage-testimonials/ManageTestimonials"; // Create this component for listing testimonials
 import EditTestimonial from "./components/admin/manage-testimonials/EditTestimonial";
 
+import AddClient from "./components/admin/manage-clients/AddClient";
+import EditClient from "./components/admin/manage-clients/EditClient";
+import ManageClients from "./components/admin/manage-clients/ManageClients";
+
 import "./App.css";
+
 
 const App = () => {
   return (
@@ -191,6 +196,11 @@ const App = () => {
           path="/admin/edit-testimonial/:id"
           element={<EditTestimonial />}
         />
+
+        <Route path="/admin/add-client" element={<AddClient />} />
+        <Route path="/admin/edit-client/:id" element={<EditClient />} />
+        <Route path="/admin/manage-clients" element={<ManageClients />} />
+
       </Routes>
     </Router>
   );

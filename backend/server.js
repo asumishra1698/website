@@ -19,6 +19,7 @@ const serviceRoutes = require("./routes/serviceRoutes");
 const serviceCategoryRoutes = require("./routes/serviceCategoryRoutes");
 const testimonialRoutes = require("./routes/testimonialRoutes");
 const dashboardRoutes = require("./routes/dashboardRoutes");
+const clientRoutes = require("./routes/clientRoutes");
 
 // Load environment variables
 dotenv.config();
@@ -49,6 +50,7 @@ app.use("/api/services", serviceRoutes);
 app.use("/api/service-categories", serviceCategoryRoutes);
 app.use("/api/testimonials", testimonialRoutes);
 app.use("/api/dashboard", dashboardRoutes);
+app.use("/api/clients", clientRoutes);
 
 // Error Handling Middleware
 app.use(errorHandler);

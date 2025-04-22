@@ -7,6 +7,7 @@ import {
   deleteProduct,
   API_URL,
 } from "../../../services/ProductService";
+import { BASE_URL } from "../../../config";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -121,7 +122,7 @@ const ProductList = () => {
                   >
                     <td className="border p-4">
                       <img
-                        src={`http://localhost:5000/${
+                        src={`${BASE_URL}/${
                           product.productImage
                             .replace(/\\/g, "/")
                             .split("backend/")[1]

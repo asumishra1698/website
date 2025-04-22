@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { fetchAllServices } from "../../services/ServiceService";
 import SEO from "../../reuseable/SEO";
 import HeroSlider from "../../reuseable/HeroSlider";
+import { BASE_URL } from "../../config";
 
 const ServiceGrid = () => {
   const [services, setServices] = useState([]);
@@ -72,7 +73,7 @@ const ServiceGrid = () => {
               className="bg-white border border-gray-200 rounded-lg shadow-md p-4 flex flex-col"
             >
               <img
-                src={`http://localhost:5000/${service.image}`}
+                src={`${BASE_URL}/${service.image}`}
                 alt={service.h1Title}
                 className="h-40 w-full object-cover rounded-md mb-4"
               />

@@ -8,6 +8,11 @@ const profileImageUploadDir = path.join(
   __dirname,
   "../uploads/profile-images/"
 );
+const clientImageUploadDir = path.join(
+  __dirname,
+  "../uploads/clients/"
+);
+
 
 if (!fs.existsSync(productUploadDir)) {
   fs.mkdirSync(productUploadDir, { recursive: true });
@@ -17,14 +22,19 @@ if (!fs.existsSync(profileImageUploadDir)) {
   fs.mkdirSync(profileImageUploadDir, { recursive: true });
 }
 
+if (!fs.existsSync(clientImageUploadDir)) {
+  fs.mkdirSync(clientImageUploadDir, { recursive: true });
+}
+
 // Multer Storage Configuration
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    // Check if the upload is for a profile image or a product
     if (req.baseUrl.includes("testimonials")) {
-      cb(null, profileImageUploadDir); // Save profile images in the profile-images directory
+      cb(null, profileImageUploadDir);
+    } else if (req.baseUrl.includes("clients")) {
+      cb(null, clientImageUploadDir);
     } else {
-      cb(null, productUploadDir); // Save product images in the products directory
+      cb(null, productUploadDir);
     }
   },
   filename: (req, file, cb) => {

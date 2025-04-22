@@ -9,14 +9,16 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from "@radix-ui/react-accordion";
+import { BASE_URL } from "../config";
 import { Plus, Minus } from "lucide-react";
 import { fetchAllServices } from "../services/ServiceService";
 import { fetchAllTestimonials } from "../services/TestimonialService";
+import { getAllClients } from "../services/ClientService";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-const Home = () => {
+const Home = () => {  
   const homeSlides = [
     {
       image: "https://iqsetters.com/assets/bg-image3.jpg",
@@ -39,10 +41,23 @@ const Home = () => {
   const [services, setServices] = useState([]);
   const [testimonials, setTestimonials] = useState([]);
   const [loading, setLoading] = useState(true);
-
   const toggleItem = (item) => {
     setOpenItem(openItem === item ? null : item);
   };
+  const [clients, setClients] = useState([]);
+
+  useEffect(() => {
+    const loadClients = async () => {
+      try {
+        const data = await getAllClients();
+        setClients(data);
+      } catch (error) {
+        console.error("Error loading clients:", error);
+      }
+    };
+
+    loadClients();
+  }, []);
 
   useEffect(() => {
     const fetchServices = async () => {
@@ -55,7 +70,6 @@ const Home = () => {
         setLoading(false);
       }
     };
-
     fetchServices();
   }, []);
 
@@ -76,7 +90,6 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      {/* Hero Slider */}
       <HeroSlider slides={homeSlides} />
 
       <SEO
@@ -85,6 +98,30 @@ const Home = () => {
         canonical={"https://gonardweb.com"}
         keywords="website development, eCommerce solutions, UX/UI design, legal services, GonardWeb"
       />
+
+      <section className="py-8 bg-gray-100">
+        <div className="container mx-auto text-center">
+          <h2 className="text-2xl font-bold mb-6">Our Trusted Clients</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+            {clients.map((client, index) => (
+              <div
+                key={index}
+                className="bg-white shadow-md rounded-lg p-4 flex flex-col items-center justify-center"
+              >
+                <img
+                  src={`${BASE_URL}/uploads/clients/${client.clientImage}`}
+                  alt={client.clientName}
+                  className="max-w-full max-h-full object-contain"
+                  style={{ width: "200px", height: "150px" }}
+                />
+                <h3 className="mt-4 text-lg font-semibold">
+                  {client.clientName}
+                </h3>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* About Section */}
       <section className="about py-16 bg-gray-50">
@@ -132,7 +169,7 @@ const Home = () => {
                   className="service-card bg-white shadow-lg rounded-lg p-6 text-center"
                 >
                   <img
-                    src={`http://localhost:5000/${service.image}`}
+                    src={`${BASE_URL}/${service.image}`}
                     alt={service.h1Title}
                     className="h-40 w-full object-cover rounded-md mb-4"
                   />
