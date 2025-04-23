@@ -6,22 +6,46 @@ import Sidebar from "../../../reuseable/Sidebar";
 import { BASE_URL } from "../../../config";
 
 const ManageClients = () => {
-  const [clients, setClients] = useState([]);
+  const [allClients, setAllClients] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [clientsPerPage] = useState(10);
   const navigate = useNavigate();
 
   useEffect(() => {
     const loadClients = async () => {
-      const data = await getAllClients();
-      setClients(data);
+      try {
+        const data = await getAllClients();
+        setAllClients(data || []);
+      } catch (error) {
+        toast.error("Failed to load clients");
+      }
     };
     loadClients();
   }, []);
 
+  const indexOfLastClient = currentPage * clientsPerPage;
+  const indexOfFirstClient = indexOfLastClient - clientsPerPage;
+  const currentClients = allClients.slice(
+    indexOfFirstClient,
+    indexOfLastClient
+  );
+  const totalPages = Math.ceil(allClients.length / clientsPerPage);
+
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this client?")) {
-      await deleteClient(id);
-      setClients(clients.filter((c) => c._id !== id));
-      toast.success("Client deleted");
+      try {
+        await deleteClient(id);
+        toast.success("Client deleted");
+        setAllClients(allClients.filter((c) => c._id !== id));
+      } catch (error) {
+        toast.error("Failed to delete client");
+      }
+    }
+  };
+
+  const handlePageChange = (page) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
     }
   };
 
@@ -33,11 +57,12 @@ const ManageClients = () => {
           <h2 className="text-2xl font-bold mb-4">Manage Clients</h2>
           <button
             onClick={() => navigate("/admin/add-client")}
-            className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg shadow hover:bg-blue-700"
           >
             + Add New Client
           </button>
         </div>
+
         <table className="w-full bg-white border rounded shadow">
           <thead>
             <tr className="bg-gray-200">
@@ -47,34 +72,75 @@ const ManageClients = () => {
             </tr>
           </thead>
           <tbody>
-            {clients.map((client) => (
-              <tr key={client._id} className="border-t">
-                <td className="p-3">
-                  <img
-                    src={`${BASE_URL}/uploads/clients/${client.clientImage}`}
-                    alt={client.clientName}
-                    className="w-16 h-16 object-cover rounded"
-                  />
-                </td>
-                <td className="p-3">{client.clientName}</td>
-                <td className="p-3">
-                  <button
-                    onClick={() => navigate(`/admin/edit-client/${client._id}`)}
-                    className="text-blue-600 hover:underline mr-4"
-                  >
-                    Edit
-                  </button>
-                  <button
-                    onClick={() => handleDelete(client._id)}
-                    className="text-red-600 hover:underline"
-                  >
-                    Delete
-                  </button>
+            {currentClients.length > 0 ? (
+              currentClients.map((client) => (
+                <tr key={client._id} className="border-t">
+                  <td className="p-3">
+                    <img
+                      src={`${BASE_URL}/uploads/clients/${client.clientImage}`}
+                      alt={client.clientName}
+                      className="w-16 h-16 object-cover rounded"
+                    />
+                  </td>
+                  <td className="p-3">{client.clientName}</td>
+                  <td className="p-3">
+                    <button
+                      onClick={() =>
+                        navigate(`/admin/edit-client/${client._id}`)
+                      }
+                      className="text-blue-600 hover:underline mr-4"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => handleDelete(client._id)}
+                      className="text-red-600 hover:underline"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="3" className="p-3 text-center text-gray-500">
+                  No clients found.
                 </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
+
+        {/* Pagination Controls */}
+        <div className="mt-6 flex justify-center items-center space-x-2">
+          <button
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+            className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 disabled:opacity-50"
+          >
+            Prev
+          </button>
+          {[...Array(totalPages)].map((_, index) => (
+            <button
+              key={index}
+              onClick={() => handlePageChange(index + 1)}
+              className={`px-3 py-1 rounded ${
+                currentPage === index + 1
+                  ? "bg-blue-500 text-white"
+                  : "bg-gray-200 hover:bg-gray-300"
+              }`}
+            >
+              {index + 1}
+            </button>
+          ))}
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 disabled:opacity-50"
+          >
+            Next
+          </button>
+        </div>
       </main>
     </div>
   );

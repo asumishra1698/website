@@ -15,8 +15,10 @@ const About = () => {
     <>
       <HeroSlider slides={aboutSlides} />
       <SEO
-        title="About Us Page | My Website"
-        description="Learn more about our company."
+        title="About Us | GonardWeb"
+        description="website designing and development, eCommerce solutions, and legal services."
+        canonical={"https://gonardweb.com/about"}
+        keywords="website development, eCommerce solutions, UX/UI design, legal services, GonardWeb"
       />
 
       <section className="bg-gray-100 py-16">

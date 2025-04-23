@@ -32,7 +32,7 @@ const ServiceGrid = () => {
     return <p className="text-center text-gray-500">No services available.</p>;
   }
 
-  const blogSlides = [
+  const serviceSlides = [
     {
       image: "https://iqsetters.com/assets/bg-image3.jpg",
       title: "All Services",
@@ -57,10 +57,12 @@ const ServiceGrid = () => {
 
   return (
     <>
-      <HeroSlider slides={blogSlides} />
+      <HeroSlider slides={serviceSlides} />
       <SEO
-        title="Latest Blogs | My Website"
-        description="Latest Blogs and Articles"
+        title="Services | GonardWeb"
+        description="website designing and development, eCommerce solutions, and legal services."
+        canonical={"https://gonardweb.com/contact"}
+        keywords="website development, eCommerce solutions, UX/UI design, legal services, GonardWeb"
       />
       <div className="p-6 lg:p-12 bg-gray-50">
         <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">

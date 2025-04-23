@@ -51,7 +51,9 @@ const BlogList = () => {
       <SEO
         title="Latest Blogs | My Website"
         description="Latest Blogs and Articles"
-      />
+        keywords="latest blogs, articles, technology, business, GonardWeb"
+        canonical={"https://gonardweb.com/blogs"}
+        />
       <div className="p-6 lg:p-12 bg-gray-50">
         <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
           Latest Blogs

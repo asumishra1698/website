@@ -106,17 +106,17 @@ const Home = () => {
             {clients.map((client, index) => (
               <div
                 key={index}
-                className="bg-white shadow-md rounded-lg p-4 flex flex-col items-center justify-center"
+                className="bg-white shadow-md rounded-lg p-1 flex flex-col items-center justify-center"
               >
                 <img
                   src={`${BASE_URL}/uploads/clients/${client.clientImage}`}
                   alt={client.clientName}
                   className="max-w-full max-h-full object-contain"
-                  style={{ width: "200px", height: "150px" }}
+                  style={{ width: "200px", height: "80px" }}
                 />
-                <h3 className="mt-4 text-lg font-semibold">
+                {/* <h3 className="mt-4 text-lg font-semibold">
                   {client.clientName}
-                </h3>
+                </h3> */}
               </div>
             ))}
           </div>

@@ -24,8 +24,8 @@ const Footer = () => {
       </div>
 
       {/* Footer Content */}
-      <div className="container-fluid mx-auto px-6 lg:px-16 py-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="container-fluid mx-auto px-6 lg:px-16 py-24">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* About Section */}
           <div>
             <h3 className="text-xl font-bold mb-4">About Us</h3>
@@ -69,6 +69,45 @@ const Footer = () => {
                   className="text-gray-400 hover:text-blue-500 transition"
                 >
                   Contact
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Services */}
+          <div>
+            <h3 className="text-xl font-bold mb-4">Services</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link
+                  to="/"
+                  className="text-gray-400 hover:text-blue-500 transition"
+                >
+                  Website Designing
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/about"
+                  className="text-gray-400 hover:text-blue-500 transition"
+                >
+                 Website Development
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/services"
+                  className="text-gray-400 hover:text-blue-500 transition"
+                >
+                 Digital Marketing
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/contact"
+                  className="text-gray-400 hover:text-blue-500 transition"
+                >
+                  App Development
                 </Link>
               </li>
             </ul>

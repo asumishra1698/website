@@ -32,17 +32,17 @@ const ServiceSidebar = () => {
       <h3 className="text-xl font-bold text-gray-800 mb-4">Related Services</h3>
       <ul className="space-y-4 mb-6">
         <li>
-          <a href="#" className="text-blue-600 hover:underline">
+          <a href="/" className="text-blue-600 hover:underline">
             Service 1
           </a>
         </li>
         <li>
-          <a href="#" className="text-blue-600 hover:underline">
+          <a href="/" className="text-blue-600 hover:underline">
             Service 2
           </a>
         </li>
         <li>
-          <a href="#" className="text-blue-600 hover:underline">
+          <a href="/" className="text-blue-600 hover:underline">
             Service 3
           </a>
         </li>

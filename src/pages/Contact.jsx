@@ -41,8 +41,10 @@ const ContactUs = () => {
     <>
       <HeroSlider slides={contactSlides} />
       <SEO
-        title="Contact Us Page | My Website"
-        description="Contact Us for inquiries, support, and assistance. We're here to help you!"
+        title="Contact Us | GonardWeb"
+        description="website designing and development, eCommerce solutions, and legal services."
+        canonical={"https://gonardweb.com/contact"}
+        keywords="website development, eCommerce solutions, UX/UI design, legal services, GonardWeb"
       />
       <div className="bg-gray-100 min-h-screen">
         <div className="max-w-7xl mx-auto p-6">
