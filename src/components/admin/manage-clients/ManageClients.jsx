@@ -12,6 +12,13 @@ const ManageClients = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      navigate("/login");
+      return;
+    }
+  }, [navigate]);
+  
+  useEffect(() => {
     const loadClients = async () => {
       try {
         const data = await getAllClients();

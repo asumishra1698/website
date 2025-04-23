@@ -40,7 +40,6 @@ const EditBlog = () => {
     getCategories();
   }, []);
 
-  // Fetch blog details by slug
   useEffect(() => {
     if (!localStorage.getItem("token")) {
       navigate("/login");

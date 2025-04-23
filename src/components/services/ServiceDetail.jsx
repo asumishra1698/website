@@ -4,12 +4,27 @@ import { fetchServiceBySlug } from "../../services/ServiceService";
 import HeroSlider from "../../reuseable/HeroSlider";
 import SEO from "../../reuseable/SEO";
 import ServiceSidebar from "./ServiceSidebar";
+import { getAllClients } from "../../services/ClientService";
 import { BASE_URL } from "../../config";
 
 const ServiceDetail = () => {
   const { slug } = useParams(); // Get the slug from the URL
   const [service, setService] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [clients, setClients] = useState([]);
+
+  useEffect(() => {
+    const loadClients = async () => {
+      try {
+        const data = await getAllClients();
+        setClients(data);
+      } catch (error) {
+        console.error("Error loading clients:", error);
+      }
+    };
+
+    loadClients();
+  }, []);
 
   useEffect(() => {
     const loadService = async () => {
@@ -43,7 +58,7 @@ const ServiceDetail = () => {
       description: "Empowering your business with cutting-edge technology.",
     },
   ];
-  
+
   return (
     <>
       <HeroSlider slides={serviceSlides} />
@@ -72,6 +87,29 @@ const ServiceDetail = () => {
         {/* Sidebar */}
         <ServiceSidebar />
       </div>
+      <section className="py-8 bg-gray-100">
+        <div className="container mx-auto text-center">
+          <h2 className="text-2xl font-bold mb-6">Our Trusted Clients</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+            {clients.map((client, index) => (
+              <div
+                key={index}
+                className="bg-white shadow-md rounded-lg p-1 flex flex-col items-center justify-center"
+              >
+                <img
+                  src={`${BASE_URL}/uploads/clients/${client.clientImage}`}
+                  alt={client.clientName}
+                  className="max-w-full max-h-full object-contain"
+                  style={{ width: "200px", height: "80px" }}
+                />
+                {/* <h3 className="mt-4 text-lg font-semibold">
+                        {client.clientName}
+                      </h3> */}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
     </>
   );
 };

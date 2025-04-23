@@ -14,6 +14,13 @@ const EditClient = () => {
   const [clientImage, setClientImage] = useState(null);
   const [previewImage, setPreviewImage] = useState("");
 
+    useEffect(() => {
+      if (!localStorage.getItem("token")) {
+        navigate("/login");
+        return;
+      }
+    }, [navigate]);
+
   useEffect(() => {
     const fetchClient = async () => {
       try {

@@ -97,31 +97,7 @@ const Home = () => {
         description="website designing and development, eCommerce solutions, and legal services."
         canonical={"https://gonardweb.com"}
         keywords="website development, eCommerce solutions, UX/UI design, legal services, GonardWeb"
-      />
-
-      <section className="py-8 bg-gray-100">
-        <div className="container mx-auto text-center">
-          <h2 className="text-2xl font-bold mb-6">Our Trusted Clients</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-            {clients.map((client, index) => (
-              <div
-                key={index}
-                className="bg-white shadow-md rounded-lg p-1 flex flex-col items-center justify-center"
-              >
-                <img
-                  src={`${BASE_URL}/uploads/clients/${client.clientImage}`}
-                  alt={client.clientName}
-                  className="max-w-full max-h-full object-contain"
-                  style={{ width: "200px", height: "80px" }}
-                />
-                {/* <h3 className="mt-4 text-lg font-semibold">
-                  {client.clientName}
-                </h3> */}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      />      
 
       {/* About Section */}
       <section className="about py-16 bg-gray-50">
@@ -259,6 +235,30 @@ const Home = () => {
               ))}
             </Swiper>
           )}
+        </div>
+      </section>
+
+      <section className="py-8 bg-gray-100">
+        <div className="container mx-auto text-center">
+          <h2 className="text-2xl font-bold mb-6">Our Trusted Clients</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+            {clients.map((client, index) => (
+              <div
+                key={index}
+                className="bg-white shadow-md rounded-lg p-1 flex flex-col items-center justify-center"
+              >
+                <img
+                  src={`${BASE_URL}/uploads/clients/${client.clientImage}`}
+                  alt={client.clientName}
+                  className="max-w-full max-h-full object-contain"
+                  style={{ width: "200px", height: "80px" }}
+                />
+                {/* <h3 className="mt-4 text-lg font-semibold">
+                  {client.clientName}
+                </h3> */}
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

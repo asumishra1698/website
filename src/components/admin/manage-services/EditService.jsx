@@ -46,6 +46,13 @@ const EditService = () => {
     }
   }, [slug]);
 
+  useEffect(() => {
+      if (!localStorage.getItem("token")) {
+        navigate("/login");
+        return;
+      }
+    }, [navigate]);
+
   // Fetch service categories
   const loadCategories = useCallback(async () => {
     try {

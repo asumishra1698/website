@@ -26,6 +26,13 @@ const AddService = () => {
     loadCategories();
   }, []);
 
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      navigate("/login");
+      return;
+    }
+  }, [navigate]);
+
   const loadCategories = async () => {
     try {
       const data = await fetchCategories(); // Fetch service categories
@@ -63,10 +70,10 @@ const AddService = () => {
     if (serviceImage) formDataToSend.append("image", serviceImage);
 
     try {
-      await createService(formDataToSend);     
+      await createService(formDataToSend);
       navigate("/admin/manage-services");
     } catch (error) {
-      console.error("Error adding service:", error);      
+      console.error("Error adding service:", error);
     }
   };
 

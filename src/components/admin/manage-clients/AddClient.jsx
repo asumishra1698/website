@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { createClient } from "../../../services/ClientService";
@@ -8,6 +8,13 @@ const AddClient = () => {
   const navigate = useNavigate();
   const [clientName, setClientName] = useState("");
   const [clientImage, setClientImage] = useState(null);
+
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      navigate("/login");
+      return;
+    }
+  }, [navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
