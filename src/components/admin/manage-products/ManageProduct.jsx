@@ -76,7 +76,7 @@ const ProductList = () => {
       <Sidebar />
       <main className="main-content p-6 bg-gray-100 min-h-screen">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-3xl font-bold text-gray-800">Product List</h2>
+          <h2 className="text-2xl font-semibold text-gray-700">Product List</h2>
           <div className="flex gap-4">
             <button
               onClick={() => navigate("/admin/add-product")}

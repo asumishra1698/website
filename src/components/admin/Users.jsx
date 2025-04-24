@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import "./Dashboard.css";
 import Sidebar from "../../reuseable/Sidebar";
 import Swal from "sweetalert2";
 import { BASE_URL } from "../../config";
@@ -75,7 +74,6 @@ const Users = () => {
   };
 
   const handleDeleteUser = async (userId) => {
-    // Show confirmation popup
     const result = await Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -86,7 +84,7 @@ const Users = () => {
       confirmButtonText: "Yes, delete it!",
     });
 
-    if (!result.isConfirmed) return; // User canceled action
+    if (!result.isConfirmed) return;
 
     try {
       const response = await fetch(`${BASE_URL}/api/auth/users/${userId}`, {
@@ -107,41 +105,57 @@ const Users = () => {
   };
 
   return (
-    <div className="dashboard-container">
+    <div className="dashboard-container flex">
       <Sidebar />
 
-      <div className="main-content p-6 bg-gray-100 min-h-screen">
+      <div className="main-content flex-1 p-6 bg-gray-100 min-h-screen">
         <div className="flex justify-between items-center mb-6">
-          <h2>Registered Users</h2>
-          {error && <p className="error">{error}</p>}
+          <h2 className="text-2xl font-semibold text-gray-700">
+            Registered Users
+          </h2>
+          {error && <p className="text-red-500">{error}</p>}
 
-          <button className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500" onClick={() => setShowAddUser(true)}>
+          <button
+            className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            onClick={() => setShowAddUser(true)}
+          >
             + Add User
           </button>
         </div>
 
-        <ul className="user-list">
-          {users.map((user) => (
-            <li key={user._id} className="user-card">
-              <span className="user-name">{user.name}</span>
-              <span className="user-email">{user.email}</span>
-              <button
-                 className="text-red-600 hover:text-red-900"
-                onClick={() => handleDeleteUser(user._id)}
+        <div className="bg-white shadow-md rounded-lg p-4">
+          <ul className="divide-y divide-gray-200">
+            {users.map((user) => (
+              <li
+                key={user._id}
+                className="flex justify-between items-center py-4 px-2 hover:bg-gray-50"
               >
-                🗑 Delete
-              </button>
-            </li>
-          ))}
-        </ul>       
+                <div>
+                  <p className="text-lg font-medium text-gray-800">
+                    {user.name}
+                  </p>
+                  <p className="text-sm text-gray-500">{user.email}</p>
+                </div>
+                <button
+                  className="text-red-600 hover:text-red-800"
+                  onClick={() => handleDeleteUser(user._id)}
+                >
+                  🗑 Delete
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
 
       {showAddUser && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <h3 className="modal-title">Add New User</h3>
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg shadow-lg p-6 w-96">
+            <h3 className="text-xl font-semibold text-gray-800 mb-4">
+              Add New User
+            </h3>
 
-            <div className="modal-inputs">
+            <div className="space-y-4">
               <input
                 type="text"
                 placeholder="Full Name"
@@ -149,6 +163,7 @@ const Users = () => {
                 onChange={(e) =>
                   setNewUser({ ...newUser, name: e.target.value })
                 }
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
               <input
@@ -158,6 +173,7 @@ const Users = () => {
                 onChange={(e) =>
                   setNewUser({ ...newUser, email: e.target.value })
                 }
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
               <input
@@ -167,16 +183,20 @@ const Users = () => {
                 onChange={(e) =>
                   setNewUser({ ...newUser, password: e.target.value })
                 }
+                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
             </div>
 
-            <div className="modal-buttons">
-              <button className="btn btn-primary" onClick={handleAddUser}>
+            <div className="flex justify-end space-x-4 mt-6">
+              <button
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                onClick={handleAddUser}
+              >
                 Add User
               </button>
               <button
-                className="btn btn-secondary"
+                className="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400"
                 onClick={() => setShowAddUser(false)}
               >
                 Cancel

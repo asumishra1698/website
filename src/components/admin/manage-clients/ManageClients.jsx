@@ -17,7 +17,7 @@ const ManageClients = () => {
       return;
     }
   }, [navigate]);
-  
+
   useEffect(() => {
     const loadClients = async () => {
       try {
@@ -61,7 +61,7 @@ const ManageClients = () => {
       <Sidebar />
       <main className="main-content p-6 bg-gray-100 min-h-screen">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold mb-4">Manage Clients</h2>
+          <h2 className="text-2xl font-semibold text-gray-700 mb-4">Manage Clients</h2>
           <button
             onClick={() => navigate("/admin/add-client")}
             className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg shadow hover:bg-blue-700"
@@ -119,7 +119,8 @@ const ManageClients = () => {
         </table>
 
         {/* Pagination Controls */}
-        <div className="mt-6 flex justify-center items-center space-x-2">
+        <div className="mt-6 flex justify-end items-center space-x-2">
+          {/* Prev Button */}
           <button
             onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage === 1}
@@ -127,6 +128,8 @@ const ManageClients = () => {
           >
             Prev
           </button>
+
+          {/* Page Numbers */}
           {[...Array(totalPages)].map((_, index) => (
             <button
               key={index}
@@ -140,6 +143,8 @@ const ManageClients = () => {
               {index + 1}
             </button>
           ))}
+
+          {/* Next Button */}
           <button
             onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage === totalPages}

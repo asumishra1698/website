@@ -56,7 +56,7 @@ const AddTestimonial = () => {
     <div className="dashboard-container">
       <Sidebar />
       <main className="main-content p-6 bg-gray-100 min-h-screen">
-        <h2 className="text-2xl font-bold mb-4">Add Testimonial</h2>
+        <h2 className="text-2xl font-semibold text-gray-700 mb-4">Add Testimonial</h2>
         <form onSubmit={handleSubmit} encType="multipart/form-data">
           <input
             type="text"

@@ -89,7 +89,7 @@ const ManageCategories = () => {
       <Sidebar />
       <div className="flex-1 p-6">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold">
+          <h2 className="text-2xl font-semibold text-gray-700">
             {categoryId ? "Edit" : "Add"} Product Category
           </h2>
           <button

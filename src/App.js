@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NotFound from "./components/PageNotFound";
 import MainLayout from "./components/MainLayout";
-
+import Testimonials from "./pages/Testimonials";
 import ScrollToTop from "./reuseable/ScrollToTop";
 import Dashboard from "./components/admin/Dashboard";
 import Users from "./components/admin/Users";
@@ -47,7 +47,7 @@ import ServiceDetail from "./components/services/ServiceDetail";
 import ServiceGrid from "./components/services/ServiceGrid";
 
 import AddTestimonial from "./components/admin/manage-testimonials/AddTestimonial";
-import ManageTestimonials from "./components/admin/manage-testimonials/ManageTestimonials"; // Create this component for listing testimonials
+import ManageTestimonials from "./components/admin/manage-testimonials/ManageTestimonials"; 
 import EditTestimonial from "./components/admin/manage-testimonials/EditTestimonial";
 
 import AddClient from "./components/admin/manage-clients/AddClient";
@@ -84,6 +84,14 @@ const App = () => {
           element={
             <MainLayout>
               <Contact />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/testimonials"
+          element={
+            <MainLayout>
+              <Testimonials />
             </MainLayout>
           }
         />

@@ -52,13 +52,41 @@ const Navbar = () => {
                 Home
               </Link>
             </li>
-            <li>
+            <li className="relative group">
               <Link
                 to="/about"
-                className="hover:text-blue-600 transition duration-300"
+                className="hover:text-blue-600 transition duration-300 flex items-center gap-2"
               >
                 About
               </Link>
+              <div className="absolute left-1/2 transform -translate-x-1/2 mt-2 bg-white shadow-lg rounded-lg w-64 p-4 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 group-hover:visible invisible transition-all duration-300 z-50">
+                <ul>
+                  <li>
+                    <Link
+                      to="/testimonials"
+                      className="block px-2 py-1 hover:bg-blue-100 hover:text-blue-600 rounded"
+                    >
+                      Clients Feedback
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/about/team"
+                      className="block px-2 py-1 hover:bg-blue-100 hover:text-blue-600 rounded"
+                    >
+                      Team
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/about/careers"
+                      className="block px-2 py-1 hover:bg-blue-100 hover:text-blue-600 rounded"
+                    >
+                      Careers
+                    </Link>
+                  </li>
+                </ul>
+              </div>
             </li>
             <li className="relative group">
               <Link

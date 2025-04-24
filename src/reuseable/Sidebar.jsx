@@ -5,10 +5,13 @@ import {
   FaThList,
   FaBlog,
   FaConciergeBell,
-  FaFileAlt,
-  FaBoxes,
+  FaTags,
+  FaBox,
   FaBoxOpen,
   FaSignOutAlt,
+  FaClipboardList,
+  FaHandshake,
+  FaStar,
 } from "react-icons/fa";
 
 const Sidebar = () => {
@@ -61,7 +64,7 @@ const Sidebar = () => {
                 to="/admin/add-category"
                 className="flex items-center p-2 hover:bg-gray-700 rounded"
               >
-                <FaBoxes className="mr-3" />
+                <FaTags className="mr-3" />
                 Product Categories
               </Link>
             </li>
@@ -70,7 +73,7 @@ const Sidebar = () => {
                 to="/admin/manage-product"
                 className="flex items-center p-2 hover:bg-gray-700 rounded"
               >
-                <FaBoxOpen className="mr-3" />
+                <FaBox className="mr-3" />
                 Products
               </Link>
             </li>
@@ -88,7 +91,7 @@ const Sidebar = () => {
                 to="/admin/manage-service-categories"
                 className="flex items-center p-2 hover:bg-gray-700 rounded"
               >
-                <FaFileAlt className="mr-3" />
+                <FaClipboardList className="mr-3" />
                 Services Categories
               </Link>
             </li>
@@ -98,7 +101,7 @@ const Sidebar = () => {
                 to="/admin/manage-services"
                 className="flex items-center p-2 hover:bg-gray-700 rounded"
               >
-                <FaFileAlt className="mr-3" />
+                <FaBoxOpen className="mr-3" />
                 Services
               </Link>
             </li>
@@ -108,7 +111,7 @@ const Sidebar = () => {
                 to="/admin/manage-testimonials"
                 className="flex items-center p-2 hover:bg-gray-700 rounded"
               >
-                <FaFileAlt className="mr-3" />
+                <FaStar className="mr-3" />
                 Manage Testimonials
               </Link>
             </li>
@@ -118,7 +121,7 @@ const Sidebar = () => {
                 to="/admin/manage-clients"
                 className="flex items-center p-2 hover:bg-gray-700 rounded"
               >
-                <FaFileAlt className="mr-3" />
+                <FaHandshake className="mr-3" />
                 Manage Clients
               </Link>
             </li>
