@@ -33,10 +33,13 @@ const Dashboard = () => {
     }
   }, [navigate]);
 
-  useEffect(() => {
+   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${BASE_URL}/api/dashboard/stats`);
+        const token = localStorage.getItem("token");
+        const response = await fetch(`${BASE_URL}/api/dashboard/stats`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         const data = await response.json();
         setStats(data);
       } catch (error) {
