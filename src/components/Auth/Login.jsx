@@ -32,11 +32,13 @@ const Login = () => {
 
       const data = await response.json();
       if (response.ok) {
-        localStorage.setItem("token", data.token);
-        toast.success("Login successful!");
-        navigate("/dashboard");
-      } else {
-        toast.error(data.message || "Invalid email or password");
+        if (data.token) {
+          localStorage.setItem("token", data.token);
+          toast.success("Login successful!");
+          navigate("/dashboard");
+        } else {
+          toast.error("No token received from server.");
+        }
       }
     } catch (error) {
       toast.error("Something went wrong! Please try again.");

@@ -6,7 +6,10 @@ export const API_URL = "http://localhost:5000/api/services";
 // ✅ Fetch all services
 export const fetchAllServices = async () => {
   try {
-    const response = await axios.get(API_URL);
+    const token = localStorage.getItem("token");
+    const response = await axios.get(API_URL, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     return response.data;
   } catch (error) {
     console.error("Error fetching all services:", error);
@@ -18,7 +21,10 @@ export const fetchAllServices = async () => {
 // ✅ Fetch a single service by slug
 export const fetchServiceBySlug = async (slug) => {
   try {
-    const response = await axios.get(`${API_URL}/${slug}`);
+    const token = localStorage.getItem("token");
+    const response = await axios.get(`${API_URL}/${slug}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     return response.data;
   } catch (error) {
     console.error(`Error fetching service by slug (${slug}):`, error);
@@ -30,8 +36,12 @@ export const fetchServiceBySlug = async (slug) => {
 // ✅ Create a new service
 export const createService = async (serviceData) => {
   try {
+    const token = localStorage.getItem("token");
     const response = await axios.post(API_URL, serviceData, {
-      headers: { "Content-Type": "multipart/form-data" },
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${token}`,
+      },
     });
     toast.success("Service created successfully!");
     return response.data;
@@ -45,8 +55,12 @@ export const createService = async (serviceData) => {
 // ✅ Update an existing service by slug
 export const updateService = async (slug, serviceData) => {
   try {
+    const token = localStorage.getItem("token");
     await axios.put(`${API_URL}/${slug}`, serviceData, {
-      headers: { "Content-Type": "multipart/form-data" },
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${token}`,
+      },
     });
     toast.success("Service updated successfully!");
   } catch (error) {
@@ -59,7 +73,10 @@ export const updateService = async (slug, serviceData) => {
 // ✅ Delete a service by slug
 export const deleteService = async (slug) => {
   try {
-    await axios.delete(`${API_URL}/${slug}`);
+    const token = localStorage.getItem("token");
+    await axios.delete(`${API_URL}/${slug}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     toast.success("Service deleted successfully!");
   } catch (error) {
     console.error(`Error deleting service by slug (${slug}):`, error);

@@ -6,7 +6,13 @@ export const API_URL = "http://localhost:5000/api/testimonials";
 // ✅ Fetch all testimonials
 export const fetchAllTestimonials = async () => {
   try {
-    const response = await axios.get(API_URL);
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const response = await axios.get(API_URL, config);
     return response.data;
   } catch (error) {
     console.error("Error fetching all testimonials:", error);
@@ -18,7 +24,10 @@ export const fetchAllTestimonials = async () => {
 // ✅ Fetch a single testimonial by ID
 export const fetchTestimonialById = async (id) => {
   try {
-    const response = await axios.get(`${API_URL}/${id}`);
+    const token = localStorage.getItem("token");
+    const response = await axios.get(`${API_URL}/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     return response.data;
   } catch (error) {
     console.error(`Error fetching testimonial by ID (${id}):`, error);
@@ -30,7 +39,10 @@ export const fetchTestimonialById = async (id) => {
 // ✅ Create a new testimonial
 export const createTestimonial = async (testimonialData) => {
   try {
-    const response = await axios.post(API_URL, testimonialData); // No need to set headers for FormData
+    const token = localStorage.getItem("token");
+    const response = await axios.post(API_URL, testimonialData, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     toast.success("Testimonial created successfully!");
     return response.data;
   } catch (error) {
@@ -43,7 +55,10 @@ export const createTestimonial = async (testimonialData) => {
 // ✅ Update an existing testimonial by ID
 export const updateTestimonial = async (id, testimonialData) => {
   try {
-    await axios.put(`${API_URL}/${id}`, testimonialData);
+    const token = localStorage.getItem("token");
+    await axios.put(`${API_URL}/${id}`, testimonialData, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     toast.success("Testimonial updated successfully!");
   } catch (error) {
     console.error(`Error updating testimonial by ID (${id}):`, error);
@@ -57,7 +72,10 @@ export const updateTestimonial = async (id, testimonialData) => {
 // ✅ Delete a testimonial by ID
 export const deleteTestimonial = async (id) => {
   try {
-    await axios.delete(`${API_URL}/${id}`);
+    const token = localStorage.getItem("token");
+    await axios.delete(`${API_URL}/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     toast.success("Testimonial deleted successfully!");
   } catch (error) {
     console.error(`Error deleting testimonial by ID (${id}):`, error);

@@ -6,7 +6,10 @@ export const API_URL = "http://localhost:5000/api/contact";
 // ✅ Fetch all contact submissions
 export const fetchAllContacts = async () => {
   try {
-    const response = await axios.get(API_URL);
+    const token = localStorage.getItem("token");
+    const response = await axios.get(API_URL, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     return response.data;
   } catch (error) {
     console.error("Error fetching contacts:", error);
@@ -35,7 +38,10 @@ export const createContact = async (contactData) => {
 // ✅ Delete a contact submission by ID
 export const deleteContact = async (id) => {
   try {
-    await axios.delete(`${API_URL}/${id}`);
+    const token = localStorage.getItem("token");
+    await axios.delete(`${API_URL}/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     toast.success("Contact deleted successfully!");
   } catch (error) {
     console.error("Error deleting contact:", error);

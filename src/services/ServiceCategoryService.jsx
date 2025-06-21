@@ -6,7 +6,10 @@ const API_URL = "http://localhost:5000/api/service-categories";
 // ✅ Fetch all categories
 export const fetchCategories = async () => {
   try {
-    const response = await axios.get(API_URL);
+    const token = localStorage.getItem("token");
+    const response = await axios.get(API_URL, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     return response.data;
   } catch (error) {
     console.error("Error fetching categories:", error);
@@ -18,7 +21,10 @@ export const fetchCategories = async () => {
 // ✅ Create a new category
 export const createCategory = async (categoryData) => {
   try {
-    const response = await axios.post(API_URL, categoryData);
+    const token = localStorage.getItem("token");
+    const response = await axios.post(API_URL, categoryData, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     return response.data;
   } catch (error) {
     console.error("Error creating category:", error);
@@ -30,7 +36,10 @@ export const createCategory = async (categoryData) => {
 // ✅ Delete a category by ID
 export const deleteCategory = async (id) => {
   try {
-    await axios.delete(`${API_URL}/${id}`);
+    const token = localStorage.getItem("token");
+    await axios.delete(`${API_URL}/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
   } catch (error) {
     console.error("Error deleting category:", error);
     toast.error("Failed to delete category.");
